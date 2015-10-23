@@ -10,17 +10,17 @@ public class Deck {
 		  cards = new ArrayList<Card>();
 		  usedCards = new ArrayList<Card>();
 		  for(CardProperties card : CardProperties.values()){		//creating the cards according to the CardProperties enum. Creation of deck.
-			  createCard(card.cardValue(), card.countInDeck(), QuickGui.importImage(card.imageLocation()));
+			  for (int i=0; i<card.countInDeck(); i++){
+			  createCard(card.cardValue(), QuickGui.importImage(card.imageLocation()));
+			  }
 			  //creates deck according to values in CardProprties, giving it a Value, the amount needed to be created, and its image as JLabel
 			  //from the quickGui.importImage converter
 			}
 	  }
 	  
-	  public void createCard(int cardValue, int cardCount, JLabel image){
-		  for (int i=0; i<cardCount; i++){
-			  Card card = new Card(cardValue, image);
-			  cards.add(card);
-		  }
+	  public void createCard(int cardValue, JLabel image){
+		  Card card = new Card(cardValue, image);
+		  cards.add(card);
 	  }
 	  
 	  public Card deal(){

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class GamePlay {
 	private int playerCount;
 	private int currentPlayer = -1;
-	private Players players;
+	public Players players;
 	private Player player;
 	private Deck deck;
 	private Card burnCard;

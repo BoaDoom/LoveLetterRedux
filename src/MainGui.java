@@ -94,16 +94,15 @@ public class MainGui extends JPanel{
 		nextButton.setVisible(true);
 		while (gamePlay.checkIfWin()){	//whole game loop, checks to see if anyone has enough points to win //***********is not passing here
 			gamePlay.startRound();
-			//startOfRound();
-			picture = QuickGui.importImage("C:/Java Work folder/Pictures/LoveLetter/lovelettercards_Guard_small.jpg");
-			gameBoard.add(picture);
-			refresh();
+			startOfRound();
 			while (gamePlay.checkIfActive()){	//single round loop, check to see if enough players are active to continue round
 				gamePlay.startTurn();
 				gamePlay.chooseCard();
 				if (!gamePlay.checkDeck()){		//checks to see if deck has a non-zero number
 					break;}
+				break;
 			}
+			break;
 			//declare winner of round
 			//set winner as players.setLastWinner(*absPlayerNumber*)
 		}
@@ -113,9 +112,14 @@ public class MainGui extends JPanel{
 	}
 
 	public void startOfRound(){
+		int localx = 0;
+		int localy = 0;
 		for (int i=0; i<playerCount; i++){
-			//gameBoard.add(players.getCardImage(i));
-			//gameBoard.add(players.getPlayer(0).getCard(0).getImage());
+			JLabel picture = gamePlay.players.getPlayer(i).getCard(0).getImage();
+			picture.setLocation(localx, localy);
+			gameBoard.add(picture);
+			localx += 100;
+			localy += 100;
 			refresh();
 		}
 	}

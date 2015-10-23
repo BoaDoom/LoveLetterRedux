@@ -28,9 +28,9 @@ public class Players {
 		return playerCount;}
 	public boolean checkIfWin() {
 		if (winRequirement == list.get(lastWinner).getScore()){
-			return true;}
-		else {
 			return false;}
+		else {
+			return true;}
 	}
 	
 	public boolean checkIfActive(){

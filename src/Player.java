@@ -5,9 +5,11 @@ public class Player {
 	private int score;
 	private boolean active = false;
 	private ArrayList<Card> hand;
-	private ArrayList<Card> discard;	
+	private ArrayList<Card> discards;	
 	Player(int playerNumber){
 		this.playerNumber = playerNumber;
+		hand = new ArrayList<Card>();
+		discards = new ArrayList<Card>();
 		active = true;
 		score = 0;
 	}
@@ -15,12 +17,9 @@ public class Player {
 		hand.add(card);}
 	
 	public void discardCard(int choice){
-		discard.add(hand.remove(choice));}
+		discards.add(hand.remove(choice));}
 	public void discardCard(){
-		discard.add(hand.remove(0));}
-	
-	public Card takeCard(){
-		return hand.get(0);}
+		discards.add(hand.remove(0));}
 	
 	public Card getCard(int choice){
 		return hand.get(choice);}
