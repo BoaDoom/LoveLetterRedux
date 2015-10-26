@@ -21,6 +21,8 @@ public class MainGui extends JPanel{
 	private ArrayList<JButton> playerButtons;
 	private GamePlay gamePlay;
 	private JLabel picture;
+	private WaitState waitState;
+	private boolean waitTrigger;
 
 	//gui generalized formats
 	public static final Integer BUTTON_WIDTH = 100;
@@ -34,6 +36,8 @@ public class MainGui extends JPanel{
 	private int playerCount;
 
 	MainGui(){
+		waitState = new WaitState();
+		waitTrigger = false;
 		quickGui = new QuickGui(); //small non-main GUI
 		playerButtons = new ArrayList<JButton>();
 
@@ -68,7 +72,11 @@ public class MainGui extends JPanel{
 			playerButtons.get(i).addActionListener(new ActionListener() {// action listener for button
 				public void actionPerformed(ActionEvent arg0) {
 					playerCount = (counter+2);
-					startPlay();
+					waitState.trigger();
+					tester();
+					try {Thread.sleep(10000);}
+		            catch (Exception ignored) {}
+					//!startPlay();
 				}
 				});
 		}
@@ -78,16 +86,19 @@ public class MainGui extends JPanel{
 		chooseRight.setBounds(442, 401, BUTTON_WIDTH, BUTTON_HEIGHT);
 		inputBox.setBounds(360, 492, 86, 20);
 		dialogBox.setBounds(294, 431, 216, 20);
-
-
 	}
 
 	public void bootGame(){
 		resetForNewGame();
 		dialogBox.setText("Choose the number of players");
 		refresh();
-	}
-	public void startPlay(){
+		waitState.start();
+		try {
+			waitState.join();
+		} catch (InterruptedException e) {}
+		}
+		public void startPlay(){
+		
 		gamePlay = new GamePlay(playerCount);
 		playerButtonsOff();
 		turnChoiceOn();
@@ -107,7 +118,7 @@ public class MainGui extends JPanel{
 			//set winner as players.setLastWinner(*absPlayerNumber*)
 		}
 		//declare winner of ggame
-		
+
 		//dialogBox.setText("CHOSEN CARD " + card.getValue());
 	}
 
@@ -136,30 +147,14 @@ public class MainGui extends JPanel{
 		outterWindow.setVisible(false);
 		outterWindow.setVisible(true);
 	}
-	
+
 	public void resetForNewGame(){
 		playerButtonsOn();
 		turnChoiceOff();
 		inputBox.setVisible(false);
 		nextButton.setVisible(false);
 	}
-	// public void waitState(){
-	// 	while(wait) {
-	// 		if (press == "unpressed") {
-	// 			//dialogBox.setText("unpressed B");
-	// 		}
-	// 		else if (press == "pressed"){
-	// 		    wait = false;
-	// 		    //tester();
-	// 		}
-	// 	}
-	// 	press = "unpressed";
-	// 	wait = true;
-	// }
-	//
-	// public void pressButton(){
-	// 	press = "pressed";
-	// }
+
 	public void playerButtonsOff(){
 		for (int i=0; i<playerButtons.size(); i++){
 			playerButtons.get(i).setVisible(false);}
@@ -168,9 +163,31 @@ public class MainGui extends JPanel{
 		for (int i=0; i<playerButtons.size(); i++){
 			playerButtons.get(i).setVisible(true);}
 	}
-	
+
 	public void tester(){
 		dialogBox.setText("TRIGGERED");
 	}
 
+}
+
+class WaitState extends Thread{
+	private boolean wait = true;
+	private boolean waitTrigger;
+	WaitState(){
+	}
+	public void Run(){
+		while(wait) {
+			if (waitTrigger = false) {
+			}
+			else if (waitTrigger = true){
+			    wait = false;
+			}
+		}
+		waitTrigger = false;
+	}
+	public void start(){
+	}
+	public void trigger(){
+		waitTrigger = true;
+	}
 }
