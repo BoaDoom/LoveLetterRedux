@@ -23,6 +23,8 @@ public class Player {
 	
 	public Card getCard(int choice){
 		return hand.get(choice);}
+	public ArrayList<Card> getHand(){
+		return hand;}
 	
 	public void reset(){
 		active = true;}

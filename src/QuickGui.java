@@ -14,9 +14,9 @@ public class QuickGui {
 	Integer playerXCord = 198;
 	Integer playerYCord = 461;
 	Integer buttonSpacing = 145;
-
-	
 	ArrayList<JButton> playerButtons = new ArrayList<JButton>();
+	ArrayList<JButton> targetButtons = new ArrayList<JButton>();
+
 	public ArrayList<JButton> numOfPlayerButtons(){
 		for (int i=MainGui.MIN_PLAYER_NUMBER; i<MainGui.MAX_PLAYER_NUMBER+1; i++){
 			JButton pButton = new JButton();
@@ -27,7 +27,18 @@ public class QuickGui {
 		}
 		return playerButtons;
 	}
-	
+	public ArrayList<JButton> targetButtons(int playerCount){
+		int xCord = (53 + (playerCount*buttonSpacing));
+		for (int i=0; i<playerCount; i++){
+			JButton pButton = new JButton();
+			int tempXCord = (xCord - (i*buttonSpacing));
+			pButton.setBounds(tempXCord, playerYCord, MainGui.BUTTON_WIDTH, MainGui.BUTTON_HEIGHT);
+			pButton.setText("Attack");
+			playerButtons.add(pButton);
+		}
+		return targetButtons;
+	}
+
 	public static final int CARD_WIDTH = 118;
 	public static final int CARD_HEIGHT = 167;
 	BufferedImage loadImage = null;
@@ -35,13 +46,13 @@ public class QuickGui {
 		BufferedImage loadImage = null;
 		try {
 	    	loadImage = ImageIO.read(new File(fileLocation));
-	    } 
+	    }
 		catch (IOException e) {
 	    	e.printStackTrace();
 	    }
 	    JLabel cardImage = new JLabel(new ImageIcon(loadImage));
 	    cardImage.setBounds(0, 0, CARD_WIDTH, CARD_HEIGHT);
 	    return cardImage;
-		
+
 	}
 }
