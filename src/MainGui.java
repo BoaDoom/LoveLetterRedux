@@ -21,6 +21,7 @@ public class MainGui extends JPanel{
 	private ArrayList<JButton> playerButtons;
 	private ArrayList<JButton> targetButtons;
 	private ArrayList<JLabel> targetNames;
+	private ArrayList<String> statusList;
 	private GamePlay gamePlay;
 	private JLabel pictureL;
 	private JLabel pictureR;
@@ -152,6 +153,10 @@ public class MainGui extends JPanel{
 	}
 
 	public void chooseTarget(){		//step 3
+		statusList = gamePlay.getStatusList();
+		for (int i=0; i<playerCount; i++){
+			targetButtons.get(i).setText(statusList.get(i));
+		}
 		pictureL.setVisible(false);
 		pictureR.setVisible(false);
 		turnChoiceOff();		//turns off card choice buttons
@@ -171,7 +176,7 @@ public class MainGui extends JPanel{
 				public void actionPerformed(ActionEvent arg0) {
 					target(counter+1);
 					targetButtonsOff();
-					gamePlay.cardAction();////////////////////////////card action is performed
+					//gamePlay.cardAction();
 				}
 			});
 		}

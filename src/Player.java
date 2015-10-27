@@ -3,14 +3,14 @@ import java.util.ArrayList;
 public class Player {
 	private int playerNumber;
 	private int score;
-	private boolean active = false;
+	private boolean active = true;
+	private boolean shielded = false;
 	private ArrayList<Card> hand;
 	private ArrayList<Card> discards;
 	Player(int playerNumber){
 		this.playerNumber = playerNumber;
 		hand = new ArrayList<Card>();
 		discards = new ArrayList<Card>();
-		active = true;
 		score = 0;
 	}
 	public void takeCard(Card card){
@@ -28,14 +28,15 @@ public class Player {
 	public ArrayList<Card> getHand(){
 		return hand;}
 
-	public void reset(){
+	public void setActive(){
 		active = true;}
-	public boolean checkActive(){
+	public boolean getActive(){
 		return active;}
 	public void eliminate(){
 		active = false;
 		discardCard();
 	}
+
 
 	public int getPlayerNumber() {
 		return playerNumber;}
@@ -44,4 +45,12 @@ public class Player {
 		return score;}
 	public void scorePoint(){
 		score++;}
-}
+
+	public void shieldOn(){
+		shielded = true;}
+	public void shieldOff(){
+		shielded = false;}
+	public boolean getShield(){
+		return shielded;}
+
+	}

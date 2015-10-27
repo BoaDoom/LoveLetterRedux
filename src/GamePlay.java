@@ -8,10 +8,13 @@ public class GamePlay {
 	private Deck deck;
 	private Card burnCard;
 	private ArrayList<Card> burnPile;
+	private ArrayList<String> statusList;
+	private ArrayList<String> tempList;
 
 	GamePlay(int playerCount){
 		deck = new Deck();
 		players = new Players(playerCount);
+		this.playerCount = playerCount;
 	}
 
 	public void startRound(){
@@ -31,6 +34,21 @@ public class GamePlay {
 	}
 	public void chooseCard(int choice){
 		player.discardCard(choice);
+	}
+
+	public ArrayList<String> getStatusList(){
+		statusList = new ArrayList<String>();
+		tempList = new ArrayList<String>();
+		statusList = players.getStatusList();
+		for (int i=0; i<playerCount; i++){
+			if (currentPlayer==i){
+				tempList.add("Yourself");
+			}
+			else{
+				tempList.add(statusList.get(i));
+			}
+		}
+		return tempList;
 	}
 	public void chooseTarget(){
 	}
