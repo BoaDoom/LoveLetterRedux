@@ -29,13 +29,13 @@ public class GamePlay {
 		player = players.getPlayer(currentPlayer);
 		player.takeCard(deck.deal());
 	}
-
-
 	public void chooseCard(int choice){
-
+		player.discardCard(choice);
 	}
 	public void chooseTarget(){
 	}
+	public void cardAction(){
+		CardActions.Action((player.getTopDiscard().getValue()), currentPlayer, deck, players.getList());}
 
 	public void rotatePlayer(){
 		currentPlayer++;

@@ -20,10 +20,12 @@ public class MainGui extends JPanel{
 	private JTextField inputBox;
 	private ArrayList<JButton> playerButtons;
 	private ArrayList<JButton> targetButtons;
+	private ArrayList<JLabel> targetNames;
 	private GamePlay gamePlay;
 	private JLabel pictureL;
 	private JLabel pictureR;
 	private JLabel pictureChoice;
+	private JLabel tempPictureChoice;
 
 	//gui generalized formats
 	public static final Integer BUTTON_WIDTH = 100;
@@ -35,6 +37,7 @@ public class MainGui extends JPanel{
 
 	QuickGui quickGui;
 	private int playerCount;
+	private int target;
 	private String nextState;
 
 	MainGui(){
@@ -42,6 +45,7 @@ public class MainGui extends JPanel{
 		quickGui = new QuickGui(); //small non-main GUI
 		playerButtons = new ArrayList<JButton>();
 		targetButtons = new ArrayList<JButton>();
+		targetNames = new ArrayList<JLabel>();
 
 		//constructor for main GUI screen
 		outterWindow = new JFrame();
@@ -91,7 +95,17 @@ public class MainGui extends JPanel{
 		chooseLeft.addActionListener(new ChooseButtonAction());
 		chooseRight.addActionListener(new ChooseButtonAction());
 	}
-	private class NextScreenAction implements ActionListener{
+
+
+
+
+	public void bootGame(){		//start of a new game. Step 0
+		resetForNewGame();
+		playerButtonsOff();
+		dialogBox.setText("Click Next to start a new Game");
+		refresh();
+	}
+	private class NextScreenAction implements ActionListener{		//initialization of players, one time thing per game
 		public void actionPerformed(ActionEvent arg0) {
 			if (nextState == "Beginning"){
 					nextButton.setVisible(false);
@@ -99,66 +113,75 @@ public class MainGui extends JPanel{
 					dialogBox.setText("How many human players?");
 					refresh();
 			}
-			else if (nextState == "NextPlayer"){
+			else if (nextState == "NextPlayer"){	//confirmation that the player looking at the screen is the right one, see nextPlayerTurn()
 				nextButton.setVisible(false);
 				turnCardChoice();
 			}
 		}
 	}
-	private class ChooseButtonAction implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == chooseLeft){
-				gamePlay.chooseCard(0);
-				turnPlayerTarget();
-			}
-			if (e.getSource() == chooseRight){
-				gamePlay.chooseCard(1);
-				turnPlayerTarget();
-			}
 
-		}
-	}
-
-
-	public void bootGame(){		//start of a new game
-		resetForNewGame();
-		playerButtonsOff();
-		dialogBox.setText("Click Next to start a new Game");
-		refresh();
-	}
-	public void startPlay(){		//lead into the new game and rotation of turns
+	public void startPlay(){		//lead into the new game and rotation of turns, step 0.5, one time play
 		nextState = "NextPlayer";		//indicating if the NEXT button should lead to the next turn or the start of a new game
 		gamePlay = new GamePlay(playerCount);
 		targetButtons = quickGui.targetButtons(playerCount);
+		targetNames = quickGui.getTargetNames();
 		addTargetButtons(targetButtons);
+		addTargetNames(targetNames);
+		targetButtonsOff();
 		startOfRound();
 	}
-	public void startOfRound(){
+	public void startOfRound(){ //Step 1
 		gamePlay.startRound();
-		nextPlayerTurn();
-	}
-	public void turnCardChoice(){
-		gamePlay.startTurn();
-		choosePictures();
-	}
-	public void turnPlayerTarget(){
-		pictureL.setVisible(false);
-		pictureR.setVisible(false);
-		chooseTarget();
+		nextPlayerTurn();		//confirmation that the player looking at the screen is the right one
 	}
 
-	// public void startOfRound(){
-	// 	int localx = 0;
-	// 	int localy = 0;
-	// 	for (int i=0; i<playerCount; i++){
-	// 		JLabel picture = gamePlay.players.getPlayer(i).getCard(0).getImage();
-	// 		picture.setLocation(localx, localy);
-	// 		gameBoard.add(picture);
-	// 		localx += 100;
-	// 		localy += 100;
-	// 		refresh();
-	// 	}
-	// }
+	public void turnCardChoice(){		//step 2
+		gamePlay.startTurn();		//gives player a new card
+		choosePictures();		//shows the players two cards and activates the choose buttons for them to select which to play
+	}
+	private class ChooseButtonAction implements ActionListener{	//the choose card button ActionListener
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == chooseLeft){
+				gamePlay.chooseCard(1);
+			}
+			if (e.getSource() == chooseRight){
+				gamePlay.chooseCard(0);
+			}
+			chooseTarget();
+		}
+	}
+
+	public void chooseTarget(){		//step 3
+		pictureL.setVisible(false);
+		pictureR.setVisible(false);
+		turnChoiceOff();		//turns off card choice buttons
+		tempPictureChoice = new JLabel();
+		tempPictureChoice = gamePlay.getPlayerCard().getImage();		//shows chosen card to play on another player
+		addNewPictureOfCardChoice(tempPictureChoice);		//puts the image of the card on the board
+		dialogBox.setText("Choose a player to play card on");
+		targetButtonsOn();
+		refresh();
+	}
+
+	public void addTargetButtons(ArrayList<JButton> targetButtons){
+		for (int i=0; i<(targetButtons.size()); i++){
+			gameBoard.add(targetButtons.get(i));
+			int counter = i;
+			targetButtons.get(i).addActionListener(new ActionListener() {// action listener for button
+				public void actionPerformed(ActionEvent arg0) {
+					target(counter+1);
+					targetButtonsOff();
+					gamePlay.cardAction();////////////////////////////card action is performed
+				}
+			});
+		}
+	}
+	public void addTargetNames(ArrayList<JLabel> targetNames){
+		for (int i=0; i<(targetNames.size()); i++){
+			gameBoard.add(targetNames.get(i));
+		}
+	}
+
 	public void nextPlayerTurn(){
 		nextButton.setVisible(true);
 		dialogBox.setText("Player "+(gamePlay.getCurrentPlayer()+1)+", click Next to start your turn");
@@ -213,29 +236,34 @@ public class MainGui extends JPanel{
 		refresh();
 	}
 
-	public void addTargetButtons(ArrayList<JButton> targetButtons){
-		for (int i=0; i<targetButtons.size()-1; i++){
-			gameBoard.add(targetButtons.get(i));
-			targetButtonsOn();
+	public void addNewPictureOfCardChoice(JLabel picture){		//if the image hasn't been added to gameBoard, it adds it, else it just changes it
+		if(pictureChoice == null){
+			pictureChoice = picture;
+			gameBoard.add(pictureChoice);
+			pictureChoice.setLocation(340, 225);
 		}
+		pictureChoice = picture;
+		pictureChoice.setVisible(true);
 	}
+
+
+
+
 	public void targetButtonsOff(){
 		for (int i=0; i<targetButtons.size(); i++){
-			targetButtons.get(i).setVisible(false);}
+			targetButtons.get(i).setVisible(false);
+			targetNames.get(i).setVisible(false);}	//names piggy backing on button activation
 	}
 	public void targetButtonsOn(){
 		for (int i=0; i<targetButtons.size(); i++){
-			targetButtons.get(i).setVisible(true);}
+			targetButtons.get(i).setVisible(true);
+			targetNames.get(i).setVisible(true);}
+	}
+	public void target(int temp){
+		target = temp;
 	}
 
-	public void chooseTarget(){
-		turnChoiceOff();
-		pictureChoice = gamePlay.getPlayerCard().getImage();
-		pictureChoice.setLocation(340, 225);
-		gameBoard.add(pictureChoice);
-		dialogBox.setText("Choose a player to play card on");
-		refresh();
-	}
+
 
 	public boolean checkIfWin(){
 		return gamePlay.checkIfWin();

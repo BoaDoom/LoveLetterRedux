@@ -5,7 +5,7 @@ public class Player {
 	private int score;
 	private boolean active = false;
 	private ArrayList<Card> hand;
-	private ArrayList<Card> discards;	
+	private ArrayList<Card> discards;
 	Player(int playerNumber){
 		this.playerNumber = playerNumber;
 		hand = new ArrayList<Card>();
@@ -15,17 +15,19 @@ public class Player {
 	}
 	public void takeCard(Card card){
 		hand.add(card);}
-	
+
 	public void discardCard(int choice){
 		discards.add(hand.remove(choice));}
 	public void discardCard(){
 		discards.add(hand.remove(0));}
-	
+	public Card getTopDiscard(){
+		return discards.get(0);}
+
 	public Card getCard(int choice){
 		return hand.get(choice);}
 	public ArrayList<Card> getHand(){
 		return hand;}
-	
+
 	public void reset(){
 		active = true;}
 	public boolean checkActive(){
@@ -37,7 +39,7 @@ public class Player {
 
 	public int getPlayerNumber() {
 		return playerNumber;}
-	
+
 	public int getScore(){
 		return score;}
 	public void scorePoint(){
