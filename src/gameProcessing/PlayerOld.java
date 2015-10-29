@@ -16,8 +16,13 @@ public class Player {
 	}
 	public void takeCard(Card card){
 		hand.add(card);}
+
+	public void discardCard(int choice){
+		discards.add(hand.remove(choice));}
 	public void discardCard(){
 		discards.add(hand.remove(0));}
+	public Card getTopDiscard(){
+		return discards.get(0);}
 
 	public Card getCard(int choice){
 		return hand.get(choice);}
