@@ -2,6 +2,7 @@ package gameProcessing;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import loveLetterGui.QuickGui;
@@ -18,9 +19,10 @@ public class Deck {
 				  //creates deck according to values in CardProprties, giving it a Value, the amount needed to be created, and its image as JLabel
 				  //from the quickGui.importImage converter
 			}
+		  shuffle();
 	  }
 
-	  public void createCard(int cardValue, JLabel image){
+	  public void createCard(int cardValue, ImageIcon image){
 		  Card card = new Card(cardValue, image);
 		  cards.add(card);
 	  }

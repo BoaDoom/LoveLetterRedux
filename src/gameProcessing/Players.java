@@ -35,4 +35,7 @@ public class Players {
 	public Player getCurrentPlayer(){
 		return roster.get(currentPlayer);
 	}
+	public Player getRoster(int playerNumber){
+		return roster.get(playerNumber);
+	}
 }

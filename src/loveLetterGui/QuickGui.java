@@ -52,18 +52,17 @@ public class QuickGui {
 
 	public static final int CARD_WIDTH = 118;
 	public static final int CARD_HEIGHT = 167;
-	BufferedImage loadImage = null;
-	public static JLabel importImage(String fileLocation){
+	public static ImageIcon importImage(String fileLocation){
 		BufferedImage loadImage = null;
+		File imageFile = new File(fileLocation);
 		try {
-	    	loadImage = ImageIO.read(new File(fileLocation));
+			loadImage = ImageIO.read(imageFile);
 	    }
 		catch (IOException e) {
 	    	e.printStackTrace();
 	    }
-	    JLabel cardImage = new JLabel(new ImageIcon(loadImage));
-	    cardImage.setBounds(0, 0, CARD_WIDTH, CARD_HEIGHT);
-	    return cardImage;
+		ImageIcon icon = new ImageIcon(loadImage);
+	    return icon;
 	}
 
 	public ArrayList<JLabel> getTargetNames(){

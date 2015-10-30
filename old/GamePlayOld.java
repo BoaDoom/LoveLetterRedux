@@ -1,7 +1,7 @@
 package gameProcessing;
 import java.util.ArrayList;
 
-public class GamePlay {
+public class GamePlayOld {
 	private int playerCount;
 	private int currentPlayer = 0;
 	public Players players;
@@ -12,7 +12,7 @@ public class GamePlay {
 	private ArrayList<String> statusList;
 	private ArrayList<String> tempList;
 
-	public GamePlay(int playerCount){
+	public GamePlayOld(int playerCount){
 		deck = new Deck();
 		players = new Players(playerCount);
 		this.playerCount = playerCount;

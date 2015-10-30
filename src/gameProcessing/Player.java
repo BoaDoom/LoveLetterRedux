@@ -18,6 +18,8 @@ public class Player {
 		hand.add(card);}
 	public void discardCard(){
 		discards.add(hand.remove(0));}
+	public void discardCard(int choice){
+		discards.add(hand.remove(choice));}
 
 	public Card getCard(int choice){
 		return hand.get(choice);}
@@ -36,7 +38,9 @@ public class Player {
 
 	public int getPlayerNumber() {
 		return playerNumber;}
-
+	public Card getDiscardedCard(){
+		return discards.get(discards.size()-1);
+	}
 	public int getScore(){
 		return score;}
 	public void scorePoint(){

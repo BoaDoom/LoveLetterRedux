@@ -1,5 +1,4 @@
 package gameProcessing;
-import loveLetterGui.MainGui;
 import loveLetterGui.NewMainGui;
 
 public class LLmainExc {

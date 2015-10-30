@@ -3,12 +3,14 @@ package loveLetterGui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import gameProcessing.*;
+import gameProcessing.GamePlay;
 import loveLetterGui.subJPanelGui.*;
+import loveLetterGui.subJPanelGui.PlayCardSelect.CardChoiceButtons;
 import loveLetterGui.subJPanelGui.PlayerCountSelect.PlayerCountButton;
 
 import javax.swing.JPanel;
@@ -45,7 +47,7 @@ public class NewMainGui{
 		mainFrame = new JFrame();
 		gameBoard = new JPanel();
 		testBox = new JLabel("TEST BOX");
-		testBox.setBounds(0, 0, 100, 50);
+		testBox.setBounds(0, 0, 500, 50);
 		gameBoard.setLayout(null);
 		gameBoard.setBackground(new Color(39,134,39)); //color green
 		gameBoard.setBounds(0, 0, 786, 593);
@@ -105,14 +107,19 @@ public class NewMainGui{
 
 		nextPlayerCheck = new NextPlayerCheck(gamePlay, confirmPlayerTurnAction); //UI panel for confirming the correct player is looking at the screen
 		playCardSelect = new PlayCardSelect(gamePlay, selectedCardAction);	//UI panel for selecting between two cards to play
-		//targetSelect = new TargetSelect(gamePlay);	//UI for selecting who to play a card on
+		targetSelect = new TargetSelect(gamePlay, targetSelectedAction);	//UI for selecting who to play a card on
 		//cardGuess = new CardGuess(gamePlay);	//UI for a played guard card to guess other players card
-
+		
 		//===adding the turn rotation panels onto the gameBoard panel
 		gameBoard.add(nextPlayerCheck);
-		//gameBoard.add(playCardSelect);
-		//gameBoard.add(targetSelect);
+		gameBoard.add(playCardSelect);
+		gameBoard.add(targetSelect);
 		//gameBoard.add(cardGuess);
+		
+		//===turning off all panels except the player check, which sets off the reaction for the rest of the panels
+		nextPlayerCheck.on();
+		playCardSelect.off();
+		targetSelect.off();
 	}
 	public class ConfirmPlayerTurnAction implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
@@ -122,13 +129,23 @@ public class NewMainGui{
 	}
 	///===================confirmed the correct player, now the turn starts
 
+	//=======selects which card to play
 	public void selectingCard(){
 		gamePlay.dealSecondCard();
-		
 		playCardSelect.on();
 	}
+	public class SelectedCardAction implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			Integer count = new Integer(((CardChoiceButtons) e.getSource()).getChoice());
+			gamePlay.getCurrentPlayer().discardCard(count);
+			playCardSelect.off();
+			selectingTarget();
+		}
+	}
+	//=====================selects which target to play card against, if any
 	public void selectingTarget(){
-
+		targetSelect.on();
+		targetSelect.askForTarget();
 	}
 	public void guessingTargetCard(){
 
@@ -136,11 +153,6 @@ public class NewMainGui{
 
 
 
-	public class SelectedCardAction implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-
-		}
-	}
 	public class TargetSelectedAction implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 
