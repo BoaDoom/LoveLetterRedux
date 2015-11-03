@@ -26,10 +26,11 @@ public class Player {
 	public ArrayList<Card> getHand(){
 		return hand;}
 
-	public void setActive(){
-		active = true;}
+
 	public boolean getActive(){
 		return active;}
+	public void setActive(){
+		active = true;}
 	public void eliminate(){
 		active = false;
 		discardCard();

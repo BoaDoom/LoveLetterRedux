@@ -23,7 +23,6 @@ public class GamePlay {
 		}
 		burnCard = deck.deal();		//mystery card, always hidden
 	}
-	
 	public void dealFirstCard(){
 		for (int i=0; i<players.getPlayerCount(); i++){
 			players.getRoster(i).takeCard(deck.deal());	//deals everyone their first card
@@ -35,12 +34,27 @@ public class GamePlay {
 	public ArrayList<Card> getCurrentHand(){
 		return getCurrentPlayer().getHand();
 	}
+
+	public void playCardAction(int playerTargetted){// a card played onto another player
+		Card cardPlayed = getCurrentPlayer().getDiscardedCard();// card played against target
+		Player targettedPlayer = players.getRoster(playerTargetted);	//target of card played
+		CardActions.Action(cardPlayed.getValue(), players.getCurrentPlayer(), targettedPlayer, deck);
+
+	}
 //---------getters and setters
 	public Player getCurrentPlayer(){
 		return players.getCurrentPlayer();
 	}
+	public Player getRosterPlayer(int choice){
+		return players.getRoster(choice);
+	}
 	public int getPlayerCount(){
 		return players.getPlayerCount();
 	}
+
+	public boolean getShield(int playerNumber){
+	return players.getRoster(playerNumber).getShield();}
+	public boolean getActive(int playerNumber){
+	return players.getRoster(playerNumber).getActive();}
 
 }

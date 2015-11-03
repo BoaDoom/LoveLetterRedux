@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class PlayerCountSelect extends JPanelTemplate{
+public class PlayerCountSelect extends JPanelTemplate{    //slecting the amount of players in the game
   private JLabel dialog;
   private PlayerCountButton twoPlayers;
   private PlayerCountButton threePlayers;

@@ -38,4 +38,8 @@ public class Players {
 	public Player getRoster(int playerNumber){
 		return roster.get(playerNumber);
 	}
+	public boolean getShield(int playerNumber){
+	return roster.get(playerNumber).getShield();}
+	public boolean getActive(int playerNumber){
+	return roster.get(playerNumber).getActive();}
 }

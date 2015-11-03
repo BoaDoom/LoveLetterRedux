@@ -3,13 +3,13 @@ import java.util.ArrayList;
 
 public class CardActions{
   CardActions(){}
-  public static void Action(int cardValue, int currentPlayer, Deck deck, ArrayList<Player> players){
+  public static void Action(int cardValue, Player currentPlayer, Player targettedPlayer, Deck deck){
     switch(cardValue){
       case 1:      //Guard
-
+      //does nothing because of alternate GUI needed
       break;
       case 2:      //Priest
-
+        
       break;
       case 3:      //Baron
 
