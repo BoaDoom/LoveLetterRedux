@@ -35,6 +35,13 @@ public class Players {
 	public Player getCurrentPlayer(){
 		return roster.get(currentPlayer);
 	}
+
+	public void rotatePlayer(){
+		currentPlayer++;
+		if (currentPlayer > 4){ //4 is max playerCount
+			currentPlayer = 0;
+		}
+	}
 	public Player getRoster(int playerNumber){
 		return roster.get(playerNumber);
 	}

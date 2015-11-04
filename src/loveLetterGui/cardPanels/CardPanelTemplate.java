@@ -1,23 +1,27 @@
 package loveLetterGui.cardPanels;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import gameProcessing.GamePlay;
+
 public class CardPanelTemplate extends JPanel{
-  public String dialogText;
+  public GamePlay gamePlay;
   public JLabel dialog;
   public JButton nextButton;
+  public ActionListener action;
   public static int panelHeight = 375;
   public static int panelLength = 420;
   public static int panelLocationX = 170;
   public static int panelLocationY = 193;
 
   public static int dialogLocationY = 175;
-  public static int dialogWidth = 221;
+  public static int dialogWidth = 250;
   public static int dialogHeight = 20;
 
   public static int buttonLocationY = 225;

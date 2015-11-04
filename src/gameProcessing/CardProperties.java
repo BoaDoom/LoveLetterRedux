@@ -3,7 +3,7 @@ package gameProcessing;
 import java.io.File;
 
 public enum CardProperties {
-	GUARDCARD		(1, "lovelettercards_Guard_small.jpg", 5, "Guard"),
+	GUARDCARD		(1, "lovelettercards_Guard_small.jpg", 10, "Guard"),
 	PRIESTCARD		(2, "lovelettercards_Priest_small.jpg", 2, "Priest"),
 	BARONCARD		(3, "lovelettercards_Baron_small.jpg", 2, "Baron"),
 	HANDMAIDCARD	(4, "lovelettercards_Handmaid_small.jpg", 2, "Handmaid"),

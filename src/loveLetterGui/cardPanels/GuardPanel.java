@@ -10,26 +10,29 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import gameProcessing.GamePlay;
+import gameProcessing.Player;
 import gameProcessing.CardProperties;
 
 public class GuardPanel extends CardPanelTemplate{
-  ArrayList<JButton> cardOptions;
+  ArrayList<CardGuessButtons> cardOptions;
   GamePlay gamePlay;
   ActionListener listernerToMainGui;
   CardGuessAction cardGuessAction;
   private int targetChoice;
   public GuardPanel(GamePlay gamePlay, ActionListener action){
-    this.gamePlay = gamePlay;
     nextButton = new JButton();
     dialog = new JLabel();
     listernerToMainGui = action;
+    this.gamePlay = gamePlay;
 
-    cardOptions = new ArrayList<JButton>();
+    cardOptions = new ArrayList<CardGuessButtons>();
     cardGuessAction = new CardGuessAction();
 
     nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
+    nextButton.setText("Next");
     nextButton.setVisible(false);
+    this.add(nextButton);
 
     int split = (panelLength/4);
     int countVar = 0;
@@ -47,28 +50,34 @@ public class GuardPanel extends CardPanelTemplate{
       this.add(cardOption);
       countVar++;
     }
+    cardOptions.get(0).setEnabled(false); //cannot guess guard as the card
     dialog.setHorizontalAlignment(SwingConstants.CENTER);
     dialog.setBounds(100, dialogLocationY, dialogWidth, dialogHeight);
     setDialog("Guess your opponent's card");
     this.add(dialog);
+    this.add(nextButton);
   }
   public void action(int targetChoice){
     this.targetChoice = targetChoice;
     nextButtonOff();
+    cardOptionsOn();
     setDialog("Guess your opponent's card");
+    setDialog(""+gamePlay.getRosterPlayer(targetChoice).getCard(0).getValue());
+
   }
 
 
   public class CardGuessAction implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			Integer guessedCard = new Integer(((CardGuessButtons) e.getSource()).getChoice()); //collects which card was guessed by the buytton pressed
+			Integer guessedCard = new Integer(((CardGuessButtons) e.getSource()).getChoice()+1); //collects which card was guessed by the buytton pressed
       if (guessedCard == gamePlay.getRosterPlayer(targetChoice).getCard(0).getValue()){ // compares the targetted player's hand with
-        setDialog("You guessed correctly! Player "+targetChoice+1+" is out of the round");
+        setDialog("You are correct! Player "+(targetChoice+1)+" is out of the round");
         gamePlay.getRosterPlayer(targetChoice).eliminate();
       }
       else{
         setDialog("You guessed incorrectly, your turn is over");
       }
+      cardOptionsOff();
       nextButton.setVisible(true);
 		}
 	}
@@ -81,6 +90,17 @@ public class GuardPanel extends CardPanelTemplate{
       return choice;
     }
   }
+  public void cardOptionsOff(){
+    for(int i=0; i<cardOptions.size(); i++){
+      cardOptions.get(i).setVisible(false);
+    }
+  }
+  public void cardOptionsOn(){
+    for(int i=0; i<cardOptions.size(); i++){
+      cardOptions.get(i).setVisible(true);
+    }
+  }
+
   public void nextButtonOff(){
     nextButton.setVisible(false);
   }

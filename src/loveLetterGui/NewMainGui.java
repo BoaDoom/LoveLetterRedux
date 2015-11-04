@@ -79,7 +79,7 @@ public class NewMainGui{
 		confirmPlayerTurnAction = new ConfirmPlayerTurnAction();
 		selectedCardAction = new SelectedCardAction();
 		targetSelectedAction = new TargetSelectedAction();
-		//cardUsedAction= new CardUseAction();
+		cardUseAction= new CardUseAction();
 
 		refresh();
 		}
@@ -237,7 +237,8 @@ public class NewMainGui{
 	public class CardUseAction implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			cardUsePanelsOff();
-			
+			gamePlay.endOfTurn();
+			nextPlayerCheck.on();
 		}
 	}
 

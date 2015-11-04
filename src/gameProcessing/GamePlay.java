@@ -35,12 +35,15 @@ public class GamePlay {
 		return getCurrentPlayer().getHand();
 	}
 
-	public void playCardAction(int playerTargetted){// a card played onto another player
-		Card cardPlayed = getCurrentPlayer().getDiscardedCard();// card played against target
-		Player targettedPlayer = players.getRoster(playerTargetted);	//target of card played
-		CardActions.Action(cardPlayed.getValue(), players.getCurrentPlayer(), targettedPlayer, deck);
-
+	public void endOfTurn(){
+		players.rotatePlayer();
 	}
+	// public void playCardAction(int playerTargetted){// a card played onto another player
+	// 	Card cardPlayed = getCurrentPlayer().getDiscardedCard();// card played against target
+	// 	Player targettedPlayer = players.getRoster(playerTargetted);	//target of card played
+	// 	CardActions.Action(cardPlayed.getValue(), players.getCurrentPlayer(), targettedPlayer, deck);
+
+	//}
 //---------getters and setters
 	public Player getCurrentPlayer(){
 		return players.getCurrentPlayer();
