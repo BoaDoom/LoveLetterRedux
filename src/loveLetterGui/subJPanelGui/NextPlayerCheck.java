@@ -18,19 +18,23 @@ public class NextPlayerCheck extends JPanelTemplate{
     nextButton.setText("Next");
     nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-
-    dialogText = new String();
-    askPlayerToGo();
-
     dialog = new JLabel();
-    dialog.setText(dialogText);
+    dialog.setText("");
     dialog.setHorizontalAlignment(SwingConstants.CENTER);
     dialog.setBounds(100, dialogLocationY, dialogWidth, dialogHeight);
-
+    
     this.add(nextButton);
     this.add(dialog);
+    
+    askPlayerToGo();
+
   }
   public void askPlayerToGo(){
-    dialogText = "Player " + (gamePlay.getCurrentPlayer().getPlayerNumber()+1) + ", press Next to start your turn";
+    dialog.setText("Player " + (gamePlay.getCurrentPlayer().getPlayerNumber()+1) + ", press Next to start your turn");
+  }
+  public void on(){
+	  askPlayerToGo();
+	  this.setVisible(true);
+	  this.repaint();
   }
 }

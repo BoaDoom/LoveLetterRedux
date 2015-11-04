@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 public class JPanelTemplate extends JPanel{
-  public String dialogText;
   public JLabel dialog;
   public static int panelHeight = 375;
   public static int panelLength = 420;
@@ -29,6 +28,7 @@ public class JPanelTemplate extends JPanel{
   }
   public void on(){
 	  this.setVisible(true);
+	  this.repaint();
   }
   public void off(){
 	  this.setVisible(false);

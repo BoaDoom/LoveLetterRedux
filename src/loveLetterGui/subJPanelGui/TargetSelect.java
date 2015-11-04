@@ -48,6 +48,7 @@ public class TargetSelect extends JPanelTemplate{
     int tempCounter = 0;    //counting to see how many targets are disabled
     for (int i=0; i<gamePlay.getPlayerCount(); i++){//sets the button names to show availibility of the targets
       targetButtons.get(i).setText("Use On");
+      targetButtons.get(i).setEnabled(true);
         if (!gamePlay.getActive(i)){    //checks if player is active
           targetButtons.get(i).setText("Out");
           targetButtons.get(i).setEnabled(false);
@@ -69,7 +70,7 @@ public class TargetSelect extends JPanelTemplate{
           }
       }
     }
-    dialog = new JLabel("Choose a player to play card on");
+    dialog.setText("Choose a player to play card on");
   }
 
 

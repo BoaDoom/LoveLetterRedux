@@ -42,7 +42,7 @@ public class GuardPanel extends CardPanelTemplate{
         yCordForButton = 300;
         countVar = 0;
       }
-      CardGuessButtons cardOption = new CardGuessButtons(countVar);
+      CardGuessButtons cardOption = new CardGuessButtons(card.cardValue()-1);
       cardOption.setText(card.cardName());
       cardOption.addActionListener(cardGuessAction);
       cardOption.setBounds((split*countVar)+((split/2)-(buttonWidth-25)/2), yCordForButton, buttonWidth-25, buttonHeight);
@@ -53,7 +53,7 @@ public class GuardPanel extends CardPanelTemplate{
     cardOptions.get(0).setEnabled(false); //cannot guess guard as the card
     dialog.setHorizontalAlignment(SwingConstants.CENTER);
     dialog.setBounds(100, dialogLocationY, dialogWidth, dialogHeight);
-    setDialog("Guess your opponent's card");
+    dialog.setText("Guess your opponent's card");
     this.add(dialog);
     this.add(nextButton);
   }
@@ -61,8 +61,8 @@ public class GuardPanel extends CardPanelTemplate{
     this.targetChoice = targetChoice;
     nextButtonOff();
     cardOptionsOn();
-    setDialog("Guess your opponent's card");
-    setDialog(""+gamePlay.getRosterPlayer(targetChoice).getCard(0).getValue());
+    dialog.setText("Guess your opponent's card");
+    dialog.setText("Player chosen: "+gamePlay.getRosterPlayer(targetChoice).getPlayerNumber()+ ", Card:"+gamePlay.getRosterPlayer(targetChoice).getCard(0).getValue());
 
   }
 
@@ -71,11 +71,11 @@ public class GuardPanel extends CardPanelTemplate{
 		public void actionPerformed(ActionEvent e){
 			Integer guessedCard = new Integer(((CardGuessButtons) e.getSource()).getChoice()+1); //collects which card was guessed by the buytton pressed
       if (guessedCard == gamePlay.getRosterPlayer(targetChoice).getCard(0).getValue()){ // compares the targetted player's hand with
-        setDialog("You are correct! Player "+(targetChoice+1)+" is out of the round");
+        dialog.setText("You are correct! Player "+(targetChoice+1)+" is out of the round");
         gamePlay.getRosterPlayer(targetChoice).eliminate();
       }
       else{
-        setDialog("You guessed incorrectly, your turn is over");
+        dialog.setText("You guessed incorrectly, your turn is over");
       }
       cardOptionsOff();
       nextButton.setVisible(true);

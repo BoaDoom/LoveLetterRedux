@@ -15,11 +15,8 @@ public class NewGameStart extends JPanelTemplate{
     startGame.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     startGame.addActionListener(action);
 
-    dialogText = new String();
-    dialogText = "Press to start a new game";
-
     dialog = new JLabel();
-    dialog.setText(dialogText);
+    dialog.setText("Press to start a new game");
     dialog.setHorizontalAlignment(SwingConstants.CENTER);
     dialog.setBounds(100, dialogLocationY, dialogWidth, dialogHeight);
 

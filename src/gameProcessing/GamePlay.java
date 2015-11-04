@@ -38,13 +38,40 @@ public class GamePlay {
 	public void endOfTurn(){
 		players.rotatePlayer();
 	}
-	// public void playCardAction(int playerTargetted){// a card played onto another player
-	// 	Card cardPlayed = getCurrentPlayer().getDiscardedCard();// card played against target
-	// 	Player targettedPlayer = players.getRoster(playerTargetted);	//target of card played
-	// 	CardActions.Action(cardPlayed.getValue(), players.getCurrentPlayer(), targettedPlayer, deck);
 
-	//}
+	//---------checks for end of round conditions
+	public boolean checkToContinueRound(){	//checks for end of round
+		if (checkForEnoughPlayers() && checkForEnoughCards()){
+			return true;
+		}
+		else {
+			players.setLastWinner();
+			return false;
+		}
+	}
+	public boolean checkForEnoughPlayers(){
+		int playerCount = 0;
+		for (int i=0; i<players.getPlayerCount(); i++){
+			if (players.getRoster(i).getActive()){
+				playerCount++;
+			}
+		}
+		if (playerCount <= 1){
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	public boolean checkForEnoughCards(){
+		return deck.checkDeck();
+	}
+
 //---------getters and setters
+
+	public int getDeckSize(){
+		return deck.deckSize();
+	}
 	public Player getCurrentPlayer(){
 		return players.getCurrentPlayer();
 	}
@@ -53,6 +80,9 @@ public class GamePlay {
 	}
 	public int getPlayerCount(){
 		return players.getPlayerCount();
+	}
+	public Player getLastWinner(){
+		return players.getRoster(players.getLastWinner());
 	}
 
 	public boolean getShield(int playerNumber){

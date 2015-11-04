@@ -61,4 +61,7 @@ public class Deck {
 		  else{return true;}
 	  }
 
+		public int deckSize(){
+			return cards.size();
+		}
 }

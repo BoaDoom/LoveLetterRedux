@@ -33,9 +33,9 @@ public class CardPanelTemplate extends JPanel{
     this.setLayout(null);
   }
 
-  public void setDialog(String textToSet){
-    dialog.setText(textToSet);
-  }
+  //public void setDialog(String textToSet){
+    //dialog.setText(textToSet);
+  //}
   public void on(){
 	  this.setVisible(true);
   }

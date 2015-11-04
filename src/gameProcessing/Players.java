@@ -26,6 +26,9 @@ public class Players {
 		roster.get(currentPlayer).takeCard(card);
 	}
 
+	public void setLastWinner(){
+		lastWinner = currentPlayer;
+	}
 	public int getLastWinner(){
 		return lastWinner;
 	}
@@ -36,10 +39,13 @@ public class Players {
 		return roster.get(currentPlayer);
 	}
 
-	public void rotatePlayer(){
+	public void rotatePlayer(){		//rotates through player roster looking for availible players
 		currentPlayer++;
-		if (currentPlayer > 4){ //4 is max playerCount
+		if (currentPlayer >= playerCount){ //4 is max playerCount
 			currentPlayer = 0;
+		}
+		if (!roster.get(currentPlayer).getActive()){
+			rotatePlayer();
 		}
 	}
 	public Player getRoster(int playerNumber){
