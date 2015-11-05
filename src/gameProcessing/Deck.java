@@ -15,15 +15,15 @@ public class Deck {
 		  usedCards = new ArrayList<Card>();
 		  for(CardProperties card : CardProperties.values()){		//creating the cards according to the CardProperties enum. Creation of deck.
 			  for (int i=0; i<card.countInDeck(); i++){
-			  	createCard(card.cardValue(), QuickGui.importImage(card.imageLocation()));}
+			  	createCard(card.cardValue(), QuickGui.importImage(card.imageLocation()), card.cardName(), card.specialTargeting());}
 				  //creates deck according to values in CardProprties, giving it a Value, the amount needed to be created, and its image as JLabel
 				  //from the quickGui.importImage converter
 			}
 		  shuffle();
 	  }
 
-	  public void createCard(int cardValue, ImageIcon image){
-		  Card card = new Card(cardValue, image);
+	  public void createCard(int cardValue, ImageIcon image, String name, boolean specialTargeting){
+		  Card card = new Card(cardValue, image, name, specialTargeting);
 		  cards.add(card);
 	  }
 

@@ -23,6 +23,12 @@ public class GamePlay {
 		}
 		burnCard = deck.deal();		//mystery card, always hidden
 	}
+	public void scorePoint(int winner){
+		players.scorePoint(winner);
+	}
+	public Card getBurnCard(){ //take the burn card in case prince is used after all the deck is used
+		return burnCard;
+	}
 	public void dealFirstCard(){
 		for (int i=0; i<players.getPlayerCount(); i++){
 			players.getRoster(i).takeCard(deck.deal());	//deals everyone their first card
@@ -34,9 +40,19 @@ public class GamePlay {
 	public ArrayList<Card> getCurrentHand(){
 		return getCurrentPlayer().getHand();
 	}
-
+	public Card dealExtraCard(){
+		return deck.deal();
+	}
 	public void endOfTurn(){
 		players.rotatePlayer();
+	}
+	public void endOfRound(){
+		for (int i=0; i<players.getPlayerCount(); i++){
+			players.getRoster(i).resetRound();
+		}
+		deck.shuffle();
+		burnPile();
+		dealFirstCard();
 	}
 
 	//---------checks for end of round conditions
@@ -45,7 +61,6 @@ public class GamePlay {
 			return true;
 		}
 		else {
-			players.setLastWinner();
 			return false;
 		}
 	}
@@ -66,7 +81,16 @@ public class GamePlay {
 	public boolean checkForEnoughCards(){
 		return deck.checkDeck();
 	}
+//---------check end of game
 
+	public boolean checkForEnoughScore(){
+		for (int i=0; i<players.getPlayerCount(); i++){
+			if (players.getRoster(i).getScore() == players.winRequirement){
+				return true;
+			}
+		}
+		return false;
+	}
 //---------getters and setters
 
 	public int getDeckSize(){
@@ -81,8 +105,8 @@ public class GamePlay {
 	public int getPlayerCount(){
 		return players.getPlayerCount();
 	}
-	public Player getLastWinner(){
-		return players.getRoster(players.getLastWinner());
+	public int getLastWinner(){
+		return players.getLastWinner();
 	}
 
 	public boolean getShield(int playerNumber){

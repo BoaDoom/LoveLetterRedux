@@ -25,7 +25,9 @@ public class Player {
 		return hand.get(choice);}
 	public ArrayList<Card> getHand(){
 		return hand;}
-
+	public Card removeCard(){
+		return hand.remove(0);
+	}
 
 	public boolean getActive(){
 		return active;}
@@ -44,7 +46,7 @@ public class Player {
 	}
 	public int getScore(){
 		return score;}
-	public void scorePoint(){
+	public void scoreAPoint(){
 		score++;}
 
 	public void shieldOn(){
@@ -54,4 +56,18 @@ public class Player {
 	public boolean getShield(){
 		return shielded;}
 
+	public int getDiscardPileValue(){
+		int totalValue = 0;
+		for (int i=0; i<discards.size(); i++){
+			totalValue =+ discards.get(i).getValue();
+		}
+		return totalValue;
 	}
+
+	public void resetRound(){
+		hand.clear();
+		discards.clear();
+		setActive();
+		shieldOff();
+	}
+}

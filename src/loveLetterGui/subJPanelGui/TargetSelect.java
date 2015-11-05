@@ -15,6 +15,7 @@ public class TargetSelect extends JPanelTemplate{
   Card playedCard;
   JLabel playedCardImage;
   JLabel dialog;
+  PlayerTargetButtons noTargetButton;
   ArrayList<PlayerTargetButtons> targetButtons;
   ArrayList<JLabel> playerNames;
   public TargetSelect(GamePlay gamePlay, ActionListener action){
@@ -25,10 +26,17 @@ public class TargetSelect extends JPanelTemplate{
     playedCardImage = new JLabel();
     playedCardImage.setBounds(150,15,118,167);
 
+    noTargetButton = new PlayerTargetButtons(-1);
+    noTargetButton.addActionListener(action);
+    noTargetButton.setBounds(150, buttonLocationY+60, buttonWidth, buttonHeight);
+    noTargetButton.setText("Discard");
+    noTargetButton.setVisible(false);
+
     dialog = new JLabel(""); //default dialog
     dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
     this.add(dialog);
     this.add(playedCardImage);
+    this.add(noTargetButton);
     int split = (panelLength/gamePlay.getPlayerCount());
     for (int i=0; i<gamePlay.getPlayerCount(); i++){    //loop for placing the correct amount of buttons and corisponding playerNames
       PlayerTargetButtons player = new PlayerTargetButtons(i);
@@ -43,6 +51,8 @@ public class TargetSelect extends JPanelTemplate{
     }
    }
   public void askForTarget(){
+  	noTargetButton.setVisible(false);
+    targetButtonsOn();
     this.playedCard = gamePlay.getCurrentPlayer().getDiscardedCard();
     playedCardImage.setIcon(playedCard.getImage()); //turns the discarded/selected card that is being used against someone
     int tempCounter = 0;    //counting to see how many targets are disabled
@@ -68,9 +78,17 @@ public class TargetSelect extends JPanelTemplate{
             targetButtons.get(i).setEnabled(false);
             tempCounter++;
           }
-      }
+        }
     }
-    dialog.setText("Choose a player to play card on");
+    if (tempCounter >= gamePlay.getPlayerCount()){
+      targetButtonsOff();
+      dialog.setText("You have no one to use this card on");
+      noTargetButton.setVisible(true);
+
+    }
+    else{
+      dialog.setText("Choose a player to play card on");
+    }
   }
 
 
@@ -83,4 +101,16 @@ public class TargetSelect extends JPanelTemplate{
       return choice;
     }
 	}
+  public void targetButtonsOff(){
+    for (int i=0; i<gamePlay.getPlayerCount(); i++){//sets the button names to show availibility of the targets
+      targetButtons.get(i).setVisible(false);
+      playerNames.get(i).setVisible(false);
+    }
+  }
+  public void targetButtonsOn(){
+    for (int i=0; i<gamePlay.getPlayerCount(); i++){//sets the button names to show availibility of the targets
+      targetButtons.get(i).setVisible(true);
+      playerNames.get(i).setVisible(true);
+    }
+  }
 }

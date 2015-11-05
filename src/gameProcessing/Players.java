@@ -7,7 +7,7 @@ public class Players {
 	private int playerCount;
 	private int lastWinner;
 	private int currentPlayer;
-	private static int winRequirement;
+	public static int winRequirement;
 	private ArrayList<Player> roster;
 	Players(int playerCount){
 		lastWinner = 0;
@@ -17,17 +17,18 @@ public class Players {
 		for (int i=0; i <playerCount; i++){	//creates all the players needed and adds them to the list array
 			roster.add(new Player(i));}
 	  switch (playerCount){ //assigns the number of rounds to win the game
-	      	case 2:winRequirement = 7;break;
-	      	case 3:winRequirement = 5;break;
-	      	case 4:winRequirement = 4;break;
+	      	case 2:winRequirement = 2;break;
+	      	case 3:winRequirement = 2;break;
+	      	case 4:winRequirement = 2;break;
 	  }
 	}
 	public void dealSecondCard(Card card){
 		roster.get(currentPlayer).takeCard(card);
 	}
 
-	public void setLastWinner(){
-		lastWinner = currentPlayer;
+	public void scorePoint(int winningPlayerNumber){
+		lastWinner = winningPlayerNumber;
+		roster.get(winningPlayerNumber).scoreAPoint();
 	}
 	public int getLastWinner(){
 		return lastWinner;

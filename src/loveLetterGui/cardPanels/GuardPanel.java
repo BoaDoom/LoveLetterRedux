@@ -62,7 +62,7 @@ public class GuardPanel extends CardPanelTemplate{
     nextButtonOff();
     cardOptionsOn();
     dialog.setText("Guess your opponent's card");
-    dialog.setText("Player chosen: "+gamePlay.getRosterPlayer(targetChoice).getPlayerNumber()+ ", Card:"+gamePlay.getRosterPlayer(targetChoice).getCard(0).getValue());
+    dialog.setText("Player chosen: "+(gamePlay.getRosterPlayer(targetChoice).getPlayerNumber()+1)+ ", Card:"+gamePlay.getRosterPlayer(targetChoice).getCard(0).getValue());
 
   }
 

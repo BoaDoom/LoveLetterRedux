@@ -1,6 +1,7 @@
 package loveLetterGui.subJPanelGui;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -8,14 +9,16 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import gameProcessing.GamePlay;
+import gameProcessing.Player;
+import gameProcessing.Players;
 
-public class NextPlayerCheck extends JPanelTemplate{
+public class EndOfGameCheck extends JPanelTemplate{
   GamePlay gamePlay;
   JButton nextButton;
-  public NextPlayerCheck(GamePlay gamePlay, ActionListener action){
+  public EndOfGameCheck(GamePlay gamePlay, ActionListener action){
     this.gamePlay = gamePlay;
     nextButton = new JButton();
-    nextButton.setText("Next");
+    nextButton.setText("New Game");
     nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
     dialog = new JLabel();
@@ -25,15 +28,11 @@ public class NextPlayerCheck extends JPanelTemplate{
 
     this.add(nextButton);
     this.add(dialog);
+  }
+  public void action(){
+    dialog.setText("The game is over, Player "+ (gamePlay.getLastWinner()+1) + " won");
+  }
 
-    askPlayerToGo();
 
-  }
-  public void askPlayerToGo(){
-    dialog.setText("Player " + (gamePlay.getCurrentPlayer().getPlayerNumber()+1) + ", press Next to start your turn");
-  }
-  public void on(){
-	  askPlayerToGo();
-	  this.setVisible(true);
-  }
+
 }
