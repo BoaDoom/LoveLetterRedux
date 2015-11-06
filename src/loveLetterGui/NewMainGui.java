@@ -51,7 +51,7 @@ public class NewMainGui{
 	private HandmaidPanel handmaidPanel;
 	private PrincePanel princePanel;
 	private KingPanel kingPanel;
-	// private CountessPanel countessPanel;
+	private CountessPanel countessPanel;
 	private PrincessPanel princessPanel;
 
 	//game play components and processing that interacts with GUI
@@ -125,7 +125,7 @@ public class NewMainGui{
 			handmaidPanel = new HandmaidPanel(gamePlay, cardUseAction);
 			princePanel = new PrincePanel(gamePlay, cardUseAction);
 			kingPanel = new KingPanel(gamePlay, cardUseAction);
-			// countessPanel = new CountessPanel(gamePlay, cardUseAction);
+			countessPanel = new CountessPanel(gamePlay, cardUseAction);
 			princessPanel = new PrincessPanel(gamePlay, cardUseAction);
 
 			//adding the turn rotation panels onto the gameBoard panel
@@ -142,7 +142,7 @@ public class NewMainGui{
 			gameBoard.add(handmaidPanel);
 			gameBoard.add(princePanel);
 			gameBoard.add(kingPanel);
-			// gameBoard.add(countessPanel);
+			gameBoard.add(countessPanel);
 			gameBoard.add(princessPanel);
 
 
@@ -268,8 +268,9 @@ public class NewMainGui{
 		baronPanel.off();
 		handmaidPanel.off();
 		princePanel.off();
+			princePanel.princessDiscardOff(); //extra dialog if the princess was discarded
 		kingPanel.off();
-		// countessPanel.off();
+		countessPanel.off();
 		princessPanel.off();
 	}
 
@@ -282,8 +283,8 @@ public class NewMainGui{
 			handmaidPanel.action();
 			break;
 			case 7:
-			// countessPanel.on();
-			// break;
+			countessPanel.on();
+			break;
 			case 8:
 			princessPanel.on();
 			princessPanel.action();

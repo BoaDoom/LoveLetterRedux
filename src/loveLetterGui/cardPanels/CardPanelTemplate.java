@@ -13,6 +13,7 @@ import gameProcessing.GamePlay;
 public class CardPanelTemplate extends JPanel{
   public GamePlay gamePlay;
   public JLabel dialog;
+  public JLabel dialog2;
   public JButton nextButton;
   public ActionListener action;
   public static int panelHeight = 375;
@@ -24,7 +25,7 @@ public class CardPanelTemplate extends JPanel{
   public static int dialogWidth = 250;
   public static int dialogHeight = 20;
 
-  public static int buttonLocationY = 225;
+  public static int buttonLocationY = 245;
   public static int buttonWidth = 119;
   public static int buttonHeight = 37;
   CardPanelTemplate(){

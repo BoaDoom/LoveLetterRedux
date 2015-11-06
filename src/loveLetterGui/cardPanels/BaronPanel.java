@@ -16,7 +16,6 @@ import gameProcessing.CardProperties;
 
 public class BaronPanel extends CardPanelTemplate{
   GamePlay gamePlay;
-  JLabel dialog2;
   JLabel dialog3;
   Card playersCard;
   Card opponentsCard;

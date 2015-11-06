@@ -3,14 +3,14 @@ package gameProcessing;
 import java.io.File;
 
 public enum CardProperties {
-	GUARDCARD		(1, "lovelettercards_Guard_small.jpg", 5, "Guard", false),
+	GUARDCARD		(1, "lovelettercards_Guard_small.jpg", 1, "Guard", false),
 	PRIESTCARD		(2, "lovelettercards_Priest_small.jpg", 2, "Priest", false),
 	BARONCARD		(3, "lovelettercards_Baron_small.jpg", 2, "Baron", false),
 	HANDMAIDCARD	(4, "lovelettercards_Handmaid_small.jpg", 2, "Handmaid", true),
-	PRINCECARD		(5, "lovelettercards_Prince_small.jpg", 2, "Prince", false),
-	KINGCARD		(6, "lovelettercards_King_small.jpg", 1, "King", false),
-	COUNTESSCARD	(7, "lovelettercards_Countess_small.jpg", 1, "Countess", true),
-	PRINCESSCARD	(8, "lovelettercards_Princess_small.jpg", 4, "Princess", true);
+	PRINCECARD		(5, "lovelettercards_Prince_small.jpg", 3, "Prince", false),
+	KINGCARD		(6, "lovelettercards_King_small.jpg", 3, "King", false),
+	COUNTESSCARD	(7, "lovelettercards_Countess_small.jpg", 6, "Countess", true),
+	PRINCESSCARD	(8, "lovelettercards_Princess_small.jpg", 1, "Princess", true);
 	// GUARDCARD		(1, "C:/Java Work folder/LoveLetterRedux/Pictures/lovelettercards_Guard_small.jpg", 5),
 	// PRIESTCARD		(2, "C:/Java Work folder/LoveLetterRedux/Pictures/lovelettercards_Priest_small.jpg", 2),
 	// BARONCARD		(3, "C:/Java Work folder/LoveLetterRedux/Pictures/lovelettercards_Baron_small.jpg", 2),
@@ -28,7 +28,6 @@ public enum CardProperties {
 	CardProperties(int cardValue, String imageLocal, int cardCount, String cardName, boolean specialTargeting){
 		File currentDir = new File("");
 		this.cardValue = cardValue;
-		//this.imageLocation = imageLocal;
 		this.imageLocation = currentDir.getAbsolutePath() + "/Pictures/" + imageLocal;
 		this.countInDeck = cardCount;
 		this.cardName = cardName;

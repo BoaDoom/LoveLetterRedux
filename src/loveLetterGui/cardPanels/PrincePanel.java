@@ -18,10 +18,12 @@ public class PrincePanel extends CardPanelTemplate{
   GamePlay gamePlay;
   Card chosenCard;
   JLabel chosenCardImage;
+  JLabel dialog2;
   private int targetChoice;
   public PrincePanel(GamePlay gamePlay, ActionListener action){
     nextButton = new JButton();
     dialog = new JLabel();
+    dialog2 = new JLabel();
     this.gamePlay = gamePlay;
 
     chosenCardImage = new JLabel();
@@ -29,12 +31,16 @@ public class PrincePanel extends CardPanelTemplate{
 
     dialog = new JLabel("Your target is forced to discard this card");
     dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
+    dialog2 = new JLabel("It's the Princess! they are knocked out");
+    dialog2.setBounds(125, dialogLocationY+25, dialogWidth, dialogHeight);
+    princessDiscardOff();
 
     nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
     nextButton.setText("Next");
 
     this.add(dialog);
+    this.add(dialog2);
     this.add(chosenCardImage);
     this.add(nextButton);
   }
@@ -42,11 +48,23 @@ public class PrincePanel extends CardPanelTemplate{
     this.chosenCard = gamePlay.getRosterPlayer(targetChoice).getCard(0);
     chosenCardImage.setIcon(chosenCard.getImage()); //turns the discarded/selected card that is being used against someone
     gamePlay.getRosterPlayer(targetChoice).discardCard();
-    if (gamePlay.checkForEnoughCards()){
-      gamePlay.getRosterPlayer(targetChoice).takeCard(gamePlay.dealExtraCard());
+    if (gamePlay.getRosterPlayer(targetChoice).getDiscardedCard().getValue() == 8){ //checks if the forced card is a princess, which loses the person the round
+      princessDiscardOn();
+      gamePlay.getRosterPlayer(targetChoice).eliminate();
     }
-    else{
-      gamePlay.getRosterPlayer(targetChoice).takeCard(gamePlay.getBurnCard());
+    else{   //player is forced to discard but must imediately draw another card
+      if (gamePlay.checkForEnoughCards()){  //as long as there are enough cards left in the deck they get one normally
+        gamePlay.getRosterPlayer(targetChoice).takeCard(gamePlay.dealExtraCard());
+      }
+      else{ //else they get the very first burn 'hidden' card and the round ends
+        gamePlay.getRosterPlayer(targetChoice).takeCard(gamePlay.getBurnCard());
+      }
     }
+  }
+  public void princessDiscardOn(){
+    dialog2.setVisible(true);
+  }
+  public void princessDiscardOff(){
+    dialog2.setVisible(false);
   }
 }

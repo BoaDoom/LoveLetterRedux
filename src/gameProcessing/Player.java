@@ -17,7 +17,9 @@ public class Player {
 	public void takeCard(Card card){
 		hand.add(card);}
 	public void discardCard(){
-		discards.add(hand.remove(0));}
+		if (hand.size()>0){
+			discards.add(hand.remove(0));}
+		}
 	public void discardCard(int choice){
 		discards.add(hand.remove(choice));}
 
