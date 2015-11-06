@@ -3,6 +3,7 @@ package gameProcessing;
 import java.io.File;
 
 public enum CardProperties {
+	//(card value, name of picture on file, count in deck, name of card, if anything other than standard targetting use)
 	GUARDCARD		(1, "lovelettercards_Guard_small.jpg", 1, "Guard", false),
 	PRIESTCARD		(2, "lovelettercards_Priest_small.jpg", 2, "Priest", false),
 	BARONCARD		(3, "lovelettercards_Baron_small.jpg", 2, "Baron", false),

@@ -65,7 +65,7 @@ public class KingPanel extends CardPanelTemplate{
     opponentsCardImage.setIcon(opponentsCard.getImage());
     String player1 = ""+(gamePlay.getRosterPlayer(targetChoice).getPlayerNumber()+1);
     String player2 = ""+(gamePlay.getCurrentPlayer().getPlayerNumber()+1);
-    dialog.setText("You've swapped cards with your target"););
+    dialog.setText("You've swapped cards with your target");
     dialog2.setText(player1 + " now owns " + player2 +"'s "+gamePlay.getCurrentPlayer().getCard(0).getName());
     dialog3.setText(player2 + " now owns " + player1 +"'s "+gamePlay.getRosterPlayer(targetChoice).getCard(0).getName());
 
