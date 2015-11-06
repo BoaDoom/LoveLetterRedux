@@ -21,10 +21,15 @@ public class HandmaidPanel extends CardPanelTemplate{
   String handmaidImageLocation;
   JLabel handmaidCardImage;
   private int targetChoice;
-  public HandmaidPanel(GamePlay gamePlay, ActionListener action){
+  JButton backButton;
+  public HandmaidPanel(GamePlay gamePlay, ActionListener action, ActionListener backButtonAction){
     nextButton = new JButton();
     dialog = new JLabel();
     this.gamePlay = gamePlay;
+
+    backButton = new JButton();
+    backButton.addActionListener(backButtonAction);
+    backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
 
     handmaidCardImage = new JLabel();
 	  File currentDir = new File("");
@@ -41,6 +46,8 @@ public class HandmaidPanel extends CardPanelTemplate{
     this.add(dialog);
     this.add(handmaidCardImage);
     this.add(nextButton);
+    this.add(backButton);
+
 
   }
   public void action(){

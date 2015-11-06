@@ -34,6 +34,8 @@ public class NewMainGui{
 	private EndOfRoundAction endOfRoundAction;
 	private EndOfGameCheckAction endOfGameCheckAction;
 
+	private BackOutOfTargettingAction backOutOfTargettingAction;
+
 	//JPanels with each interactive part of the game inside them
 	private NewGameStart newGameStart;
 	private PlayerCountSelect playerCountSelect;
@@ -86,6 +88,8 @@ public class NewMainGui{
 		endOfRoundAction = new EndOfRoundAction();
 		endOfGameCheckAction = new EndOfGameCheckAction();
 
+		backOutOfTargettingAction = new BackOutOfTargettingAction();
+
 		refresh();
 		}
 	//=====================UI panel for asking to start a new game. offial start of game, not inside of game loop
@@ -114,7 +118,7 @@ public class NewMainGui{
 
 			nextPlayerCheck = new NextPlayerCheck(gamePlay, confirmPlayerTurnAction); //UI panel for confirming the correct player is looking at the screen
 			playCardSelect = new PlayCardSelect(gamePlay, selectedCardAction);	//UI panel for selecting between two cards to play
-			targetSelect = new TargetSelect(gamePlay, targetSelectedAction);	//UI for selecting who to play a card on
+			targetSelect = new TargetSelect(gamePlay, targetSelectedAction, backOutOfTargettingAction);	//UI for selecting who to play a card on
 			endOfRound = new EndOfRound(gamePlay, endOfRoundAction);
 			endOfGameCheck = new EndOfGameCheck(gamePlay, endOfGameCheckAction);
 
@@ -122,11 +126,11 @@ public class NewMainGui{
 			guardPanel = new GuardPanel(gamePlay, cardUseAction);
 			priestPanel = new PriestPanel(gamePlay, cardUseAction);
 			baronPanel = new BaronPanel(gamePlay, cardUseAction);
-			handmaidPanel = new HandmaidPanel(gamePlay, cardUseAction);
+			handmaidPanel = new HandmaidPanel(gamePlay, cardUseAction, backOutOfTargettingAction);
 			princePanel = new PrincePanel(gamePlay, cardUseAction);
 			kingPanel = new KingPanel(gamePlay, cardUseAction);
-			countessPanel = new CountessPanel(gamePlay, cardUseAction);
-			princessPanel = new PrincessPanel(gamePlay, cardUseAction);
+			countessPanel = new CountessPanel(gamePlay, cardUseAction, backOutOfTargettingAction);
+			princessPanel = new PrincessPanel(gamePlay, cardUseAction, backOutOfTargettingAction);
 
 			//adding the turn rotation panels onto the gameBoard panel
 			gameBoard.add(nextPlayerCheck);
@@ -190,6 +194,15 @@ public class NewMainGui{
 			}
 		}
 	}
+	public class BackOutOfTargettingAction implements ActionListener{//backing out of the targeting menu back button action
+		public void actionPerformed(ActionEvent e){
+			targetSelect.off();
+			cardUsePanelsOff();
+			gamePlay.getCurrentPlayer().targetSelectUndo();
+			playCardSelect.on();
+		}
+	}
+
 	public class TargetSelectedAction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			targetSelect.off();

@@ -46,6 +46,9 @@ public class Player {
 	public Card getDiscardedCard(){
 		return discards.get(discards.size()-1);
 	}
+	public void undoDiscardCard(){
+		takeCard(discards.remove(discards.size()-1));
+	}
 	public int getScore(){
 		return score;}
 	public void scoreAPoint(){
@@ -64,6 +67,14 @@ public class Player {
 			totalValue =+ discards.get(i).getValue();
 		}
 		return totalValue;
+	}
+
+	public void targetSelectUndo(){ //puts 'used' card back in hand to redo targetting selection
+		if ((discards.get(discards.size()-2).getValue() == 8)){ //for the times the princess card is played and needs to be undone
+			active = true;
+			undoDiscardCard();
+		}
+		undoDiscardCard();
 	}
 
 	public void resetRound(){

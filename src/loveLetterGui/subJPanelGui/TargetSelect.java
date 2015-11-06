@@ -16,12 +16,17 @@ public class TargetSelect extends JPanelTemplate{
   JLabel playedCardImage;
   JLabel dialog;
   PlayerTargetButtons noTargetButton;
+  JButton backButton;
   ArrayList<PlayerTargetButtons> targetButtons;
   ArrayList<JLabel> playerNames;
-  public TargetSelect(GamePlay gamePlay, ActionListener action){
+  public TargetSelect(GamePlay gamePlay, ActionListener action, ActionListener backButtonAction){
     this.gamePlay = gamePlay;
     targetButtons = new ArrayList<PlayerTargetButtons>();
     playerNames = new ArrayList<JLabel>();
+
+    backButton = new JButton();
+    backButton.addActionListener(backButtonAction);
+    backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
 
     playedCardImage = new JLabel();
     playedCardImage.setBounds(150,15,118,167);
@@ -37,6 +42,8 @@ public class TargetSelect extends JPanelTemplate{
     this.add(dialog);
     this.add(playedCardImage);
     this.add(noTargetButton);
+    this.add(backButton);
+    
     int split = (panelLength/gamePlay.getPlayerCount());
     for (int i=0; i<gamePlay.getPlayerCount(); i++){    //loop for placing the correct amount of buttons and corisponding playerNames
       PlayerTargetButtons player = new PlayerTargetButtons(i);
@@ -92,15 +99,6 @@ public class TargetSelect extends JPanelTemplate{
   }
 
 
-  public class PlayerTargetButtons extends JButton{
-    int choice;
-    PlayerTargetButtons(int choice){
-      this.choice = choice;
-    }
-    public int getChoice(){
-      return choice;
-    }
-	}
   public void targetButtonsOff(){
     for (int i=0; i<gamePlay.getPlayerCount(); i++){//sets the button names to show availibility of the targets
       targetButtons.get(i).setVisible(false);
@@ -113,4 +111,14 @@ public class TargetSelect extends JPanelTemplate{
       playerNames.get(i).setVisible(true);
     }
   }
+
+  public class PlayerTargetButtons extends JButton{
+    int choice;
+    PlayerTargetButtons(int choice){
+      this.choice = choice;
+    }
+    public int getChoice(){
+      return choice;
+    }
+	}
 }

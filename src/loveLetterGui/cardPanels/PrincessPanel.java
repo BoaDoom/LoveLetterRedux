@@ -20,11 +20,16 @@ public class PrincessPanel extends CardPanelTemplate{
   GamePlay gamePlay;
   String princessImageLocation;
   JLabel princessCardImage;
+  JButton backButton;
   private int targetChoice;
-  public PrincessPanel(GamePlay gamePlay, ActionListener action){
+  public PrincessPanel(GamePlay gamePlay, ActionListener action, ActionListener backButtonAction){
     nextButton = new JButton();
     dialog = new JLabel();
     this.gamePlay = gamePlay;
+
+    backButton = new JButton();
+    backButton.addActionListener(backButtonAction);
+    backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
 
     princessCardImage = new JLabel();
 	  File currentDir = new File("");
@@ -41,6 +46,7 @@ public class PrincessPanel extends CardPanelTemplate{
     this.add(dialog);
     this.add(princessCardImage);
     this.add(nextButton);
+    this.add(backButton);
 
   }
   public void action(){

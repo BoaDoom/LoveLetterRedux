@@ -14,6 +14,7 @@ public class CardPanelTemplate extends JPanel{
   public GamePlay gamePlay;
   public JLabel dialog;
   public JLabel dialog2;
+  public JLabel dialog3;
   public JButton nextButton;
   public ActionListener action;
   public static int panelHeight = 375;
@@ -32,6 +33,13 @@ public class CardPanelTemplate extends JPanel{
     this.setBackground(new Color(39,100,39));
     this.setBounds(panelLocationX, panelLocationY, panelLength, panelHeight);
     this.setLayout(null);
+    dialog = new JLabel("");
+    dialog.setBounds(125, dialogLocationY+40, dialogWidth, dialogHeight);
+
+    dialog2 = new JLabel("");
+    dialog2.setBounds(125, dialogLocationY+60, dialogWidth, dialogHeight);
+    dialog3 = new JLabel("");
+    dialog3.setBounds(125, dialogLocationY+80, dialogWidth, dialogHeight);
   }
 
   //public void setDialog(String textToSet){

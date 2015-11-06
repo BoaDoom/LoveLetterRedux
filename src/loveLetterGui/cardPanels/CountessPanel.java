@@ -20,11 +20,16 @@ public class CountessPanel extends CardPanelTemplate{
   GamePlay gamePlay;
   String countessImageLocation;
   JLabel countessCardImage;
+  JButton backButton;
   private int targetChoice;
-  public CountessPanel(GamePlay gamePlay, ActionListener action){
+  public CountessPanel(GamePlay gamePlay, ActionListener action, ActionListener backButtonAction){
     nextButton = new JButton();
     dialog = new JLabel();
     this.gamePlay = gamePlay;
+
+    backButton = new JButton();
+    backButton.addActionListener(backButtonAction);
+    backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
 
     countessCardImage = new JLabel();
 	  File currentDir = new File("");
@@ -41,6 +46,8 @@ public class CountessPanel extends CardPanelTemplate{
     this.add(dialog);
     this.add(countessCardImage);
     this.add(nextButton);
+    this.add(backButton);
+
 
   }
   public void action(){
