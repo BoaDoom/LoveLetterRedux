@@ -181,10 +181,10 @@ public class NewMainGui{
 	public class SelectedCardAction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Integer count = new Integer(((CardChoiceButtons) e.getSource()).getChoice());	//collects which button was pressed between the two options
-			gamePlay.getCurrentPlayer().discardCard(count);
+			gamePlay.getCurrentPlayer().playCard(count);
 			playCardSelect.off();
 							//special action for non target cards
-			if (gamePlay.getCurrentPlayer().getDiscardedCard().getSpecialTargeting()){
+			if (gamePlay.getCurrentPlayer().getPlayedCard().getSpecialTargeting()){	//if the card doesn't have the common targeting action, i.e. self targeting only
 				specialTargetingCards();
 			}
 			else{
@@ -198,7 +198,7 @@ public class NewMainGui{
 		public void actionPerformed(ActionEvent e){
 			targetSelect.off();
 			cardUsePanelsOff();
-			gamePlay.getCurrentPlayer().targetSelectUndo();
+			// gamePlay.getCurrentPlayer().targetSelectUndo();
 			playCardSelect.on();
 		}
 	}
@@ -206,13 +206,13 @@ public class NewMainGui{
 	public class TargetSelectedAction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			targetSelect.off();
-			Integer target = new Integer(((PlayerTargetButtons) e.getSource()).getChoice()); //collects which target was chosen by the buytton pressed
+			Integer target = new Integer(((PlayerTargetButtons) e.getSource()).getChoice()); //collects which target was chosen by the button pressed
 			if (target == -1){		//if the card was played without any action or target
 				gamePlay.endOfTurn();	//rotates to next player
 				nextPlayerCheck.on();	//starts next players turn if the round isn't over
 			}
 			else{
-				int cardUsed = gamePlay.getCurrentPlayer().getDiscardedCard().getValue();		//turns on the appropriate card action panel
+				int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();		//turns on the appropriate card action panel
 				switch(cardUsed){
 					case 1:      //Guard
 					guardPanel.action(target);
@@ -241,6 +241,8 @@ public class NewMainGui{
 	}
 	public class CardUseAction implements ActionListener{
 		public void actionPerformed(ActionEvent e){
+			specialTargetingCardsAction();	//performs the action of self-use only cards after the card is confirmed
+			gamePlay.getCurrentPlayer().discardChoice();
 			cardUsePanelsOff();
 			if (gamePlay.checkToContinueRound()){
 				gamePlay.endOfTurn();	//rotates to next player
@@ -289,21 +291,32 @@ public class NewMainGui{
 
 
 	public void specialTargetingCards(){
-		int cardUsed = gamePlay.getCurrentPlayer().getDiscardedCard().getValue();
+		int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();
 		switch(cardUsed){
 			case 4:
 			handmaidPanel.on();
-			handmaidPanel.action();
 			break;
 			case 7:
 			countessPanel.on();
 			break;
 			case 8:
 			princessPanel.on();
+			break;
+		}
+	}
+
+	public void specialTargetingCardsAction(){
+		int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();
+		switch(cardUsed){
+			case 4:
+			handmaidPanel.action();
+			break;
+			case 8:
 			princessPanel.action();
 			break;
 		}
 	}
+
 	public void refresh(){
 		gameBoard.validate();
 		gameBoard.repaint();

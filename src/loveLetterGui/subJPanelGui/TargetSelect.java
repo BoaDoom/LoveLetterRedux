@@ -43,7 +43,7 @@ public class TargetSelect extends JPanelTemplate{
     this.add(playedCardImage);
     this.add(noTargetButton);
     this.add(backButton);
-    
+
     int split = (panelLength/gamePlay.getPlayerCount());
     for (int i=0; i<gamePlay.getPlayerCount(); i++){    //loop for placing the correct amount of buttons and corisponding playerNames
       PlayerTargetButtons player = new PlayerTargetButtons(i);
@@ -60,7 +60,7 @@ public class TargetSelect extends JPanelTemplate{
   public void askForTarget(){
   	noTargetButton.setVisible(false);
     targetButtonsOn();
-    this.playedCard = gamePlay.getCurrentPlayer().getDiscardedCard();
+    this.playedCard = gamePlay.getCurrentPlayer().getPlayedCard();
     playedCardImage.setIcon(playedCard.getImage()); //turns the discarded/selected card that is being used against someone
     int tempCounter = 0;    //counting to see how many targets are disabled
     for (int i=0; i<gamePlay.getPlayerCount(); i++){//sets the button names to show availibility of the targets

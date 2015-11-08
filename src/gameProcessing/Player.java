@@ -4,8 +4,10 @@ import java.util.ArrayList;
 public class Player {
 	private int playerNumber;
 	private int score;
+	private int cardChoice;
 	private boolean active = true;
 	private boolean shielded = false;
+	private Card playedCard;
 	private ArrayList<Card> hand;
 	private ArrayList<Card> discards;
 	Player(int playerNumber){
@@ -20,8 +22,13 @@ public class Player {
 		if (hand.size()>0){
 			discards.add(hand.remove(0));}
 		}
-	public void discardCard(int choice){
-		discards.add(hand.remove(choice));}
+	public void discardChoice(){
+		discards.add(hand.remove(cardChoice));
+	}
+	public void playCard(int choice){
+		cardChoice = choice;
+		playedCard = hand.get(choice);
+	}
 
 	public Card getCard(int choice){
 		return hand.get(choice);}
@@ -46,9 +53,13 @@ public class Player {
 	public Card getDiscardedCard(){
 		return discards.get(discards.size()-1);
 	}
+	public Card getPlayedCard(){
+		return playedCard;
+	}
 	public void undoDiscardCard(){
 		takeCard(discards.remove(discards.size()-1));
 	}
+
 	public int getScore(){
 		return score;}
 	public void scoreAPoint(){
@@ -69,13 +80,14 @@ public class Player {
 		return totalValue;
 	}
 
-	public void targetSelectUndo(){ //puts 'used' card back in hand to redo targetting selection
-		if ((discards.get(discards.size()-2).getValue() == 8)){ //for the times the princess card is played and needs to be undone
-			active = true;
-			undoDiscardCard();
-		}
-		undoDiscardCard();
-	}
+	// public void targetSelectUndo(){ //puts 'used' card back in hand to redo targetting selection
+		// if ((discards.get(discards.size()-1).getValue() == 8)){ //for the times the princess card is played and needs to be undone
+		// 	active = true;
+		// 	undoDiscardCard();
+		// }
+		// undoDiscardCard();
+
+	//}
 
 	public void resetRound(){
 		hand.clear();
