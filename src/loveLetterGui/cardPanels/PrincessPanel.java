@@ -17,32 +17,17 @@ import gameProcessing.Card;
 import gameProcessing.CardProperties;
 
 public class PrincessPanel extends CardPanelTemplate{
-  // GamePlay gamePlay;
   String princessImageLocation;
-  // JLabel cardImageCenter;
-  // JButton backButton;
-  // private int targetChoice;
   public PrincessPanel(GamePlay gamePlay, ActionListener action, ActionListener backButtonAction){
-    // nextButton = new JButton();
-    // dialog = new JLabel();
     this.gamePlay = gamePlay;
 
-    // backButton = new JButton();
     backButton.addActionListener(backButtonAction);
-    // backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
-
-    // cardImageCenter = new JLabel();
 	  File currentDir = new File("");
     princessImageLocation = currentDir.getAbsolutePath() + "/Pictures/lovelettercards_Princess_small.jpg";
     cardImageCenter.setIcon(QuickGui.importImage(princessImageLocation));
-    // cardImageCenter.setBounds(150,15,118,167);
 
     dialog1.setText("The Princess has been discarded, you are eliminated");
-    // dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
-
-    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    // nextButton.setText("Next");
     this.add(dialog1);
     this.add(cardImageCenter);
     this.add(nextButton);

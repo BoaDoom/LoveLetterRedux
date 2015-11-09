@@ -83,56 +83,56 @@ public class GuiFormatingInfo extends JPanel{
 
 
 	public GuiFormatingInfo() {
-	    this.setBackground(new Color(39,100,39));
-	    this.setBounds(panelBounds);
-	    setLayout(null);
-
-	    JLabel card1 = new JLabel("CARD1");
-	    card1.setBounds(card1Bounds);
-	    add(card1);
-
-	    JLabel card2 = new JLabel("CARD2");
-	    card2.setBounds(card2Bounds);
-	    add(card2);
-
-	    JLabel cardCenter = new JLabel("CARDCENTER");
-	    cardCenter.setBounds(cardCenterBounds);
-	    add(cardCenter);
-
-	    JLabel dialog0 = new JLabel("this is a test for this dialog");
-	    dialog0.setBounds(dialog0Bounds);
-	    dialog0.setHorizontalAlignment(SwingConstants.CENTER);
-	    add(dialog0);
-
-	    JLabel dialog1 = new JLabel("this is a test for this dialog1");
-	    dialog1.setHorizontalAlignment(SwingConstants.CENTER);
-	    dialog1.setBounds(dialog1Bounds);
-	    add(dialog1);
-
-	    JLabel dialog2 = new JLabel("this is a test for this dialog2");
-	    dialog2.setHorizontalAlignment(SwingConstants.CENTER);
-	    dialog2.setBounds(dialog2Bounds);
-	    add(dialog2);
-
-	    JLabel dialog3 = new JLabel("this is a test for this dialog3");
-	    dialog3.setHorizontalAlignment(SwingConstants.CENTER);
-	    dialog3.setBounds(dialog3Bounds);
-	    add(dialog3);
-
-	    JButton buttonChoice1 = new JButton("Choice 1");
-	    buttonChoice1.setBounds(buttonChoice1Bounds);
-	    add(buttonChoice1);
-
-	    JButton buttonChoice2 = new JButton("Choice 2");
-	    buttonChoice2.setBounds(buttonChoice2Bounds);
-	    add(buttonChoice2);
-
-	    JButton btnBack = new JButton("back");
-	    btnBack.setBounds(10, 341, 89, 23);
-	    add(btnBack);
-
-	    JButton next = new JButton("next");
-	    next.setBounds(buttonNextBounds);
-	    add(next);
+	    // this.setBackground(new Color(39,100,39));
+	    // this.setBounds(panelBounds);
+	    // setLayout(null);
+			//
+	    // JLabel card1 = new JLabel("CARD1");
+	    // card1.setBounds(card1Bounds);
+	    // add(card1);
+			//
+	    // JLabel card2 = new JLabel("CARD2");
+	    // card2.setBounds(card2Bounds);
+	    // add(card2);
+			//
+	    // JLabel cardCenter = new JLabel("CARDCENTER");
+	    // cardCenter.setBounds(cardCenterBounds);
+	    // add(cardCenter);
+			//
+	    // JLabel dialog0 = new JLabel("this is a test for this dialog");
+	    // dialog0.setBounds(dialog0Bounds);
+	    // dialog0.setHorizontalAlignment(SwingConstants.CENTER);
+	    // add(dialog0);
+			//
+	    // JLabel dialog1 = new JLabel("this is a test for this dialog1");
+	    // dialog1.setHorizontalAlignment(SwingConstants.CENTER);
+	    // dialog1.setBounds(dialog1Bounds);
+	    // add(dialog1);
+			//
+	    // JLabel dialog2 = new JLabel("this is a test for this dialog2");
+	    // dialog2.setHorizontalAlignment(SwingConstants.CENTER);
+	    // dialog2.setBounds(dialog2Bounds);
+	    // add(dialog2);
+			//
+	    // JLabel dialog3 = new JLabel("this is a test for this dialog3");
+	    // dialog3.setHorizontalAlignment(SwingConstants.CENTER);
+	    // dialog3.setBounds(dialog3Bounds);
+	    // add(dialog3);
+			//
+	    // JButton buttonChoice1 = new JButton("Choice 1");
+	    // buttonChoice1.setBounds(buttonChoice1Bounds);
+	    // add(buttonChoice1);
+			//
+	    // JButton buttonChoice2 = new JButton("Choice 2");
+	    // buttonChoice2.setBounds(buttonChoice2Bounds);
+	    // add(buttonChoice2);
+			//
+	    // JButton btnBack = new JButton("back");
+	    // btnBack.setBounds(10, 341, 89, 23);
+	    // add(btnBack);
+			//
+	    // JButton next = new JButton("next");
+	    // next.setBounds(buttonNextBounds);
+	    // add(next);
 	}
 }

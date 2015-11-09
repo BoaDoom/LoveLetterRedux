@@ -80,33 +80,6 @@ public class CardPanelTemplate extends JPanel{
 	public static final int buttonBackLocationY = (panelHeight-50);
 	protected Rectangle buttonBackBounds = new Rectangle(buttonBackLocationX, buttonBackLocationY, buttonBackLength, buttonBackHeight);
 
-  // public GamePlay gamePlay;
-  //
-  // public JLabel dialog0;
-  // public JLabel dialog1;
-  // public JLabel dialog2;
-  // public JLabel dialog3;
-  // public JLabel cardImage1;
-  // public JLabel cardImage2;
-  // public JLabel cardImageCenter;
-  // public JButton cardButton1;
-  // public JButton cardButton2;
-  // public JButton nextButton;
-  // public JButton backButton;
-  // public ActionListener action;
-
-  // public static int panelHeight = 375;
-  // public static int panelLength = 420;
-  // public static int panelLocationX = 170;
-  // public static int panelLocationY = 193;
-  //
-  // public static int dialogLocationY = 175;
-  // public static int dialogWidth = 250;
-  // public static int dialogHeight = 20;
-  //
-  // public static int buttonLocationY = 245;
-  // public static int buttonWidth = 119;
-  // public static int buttonHeight = 37;
     protected GamePlay gamePlay;
     protected int targetChoice;
 
@@ -158,21 +131,9 @@ public class CardPanelTemplate extends JPanel{
     nextButton.setText("Next");
     backButton.setText("Back");
 
-    // this.setBackground(new Color(39,100,39));
-    // this.setBounds(panelLocationX, panelLocationY, panelLength, panelHeight);
-    // this.setLayout(null);
-    // dialog = new JLabel("");
-    // dialog.setBounds(125, dialogLocationY+40, dialogWidth, dialogHeight);
-    //
-    // dialog2 = new JLabel("");
-    // dialog2.setBounds(125, dialogLocationY+60, dialogWidth, dialogHeight);
-    // dialog3 = new JLabel("");
-    // dialog3.setBounds(125, dialogLocationY+80, dialogWidth, dialogHeight);
   }
 
-  //public void setDialog(String textToSet){
-    //dialog.setText(textToSet);
-  //}
+
   public void on(){
 	  this.setVisible(true);
   }

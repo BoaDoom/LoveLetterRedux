@@ -15,24 +15,12 @@ import gameProcessing.Card;
 import gameProcessing.CardProperties;
 
 public class PriestPanel extends CardPanelTemplate{
-  // GamePlay gamePlay;
   Card opponentsCard;
-  // JLabel cardImageCenter;
-  // private int targetChoice;
   public PriestPanel(GamePlay gamePlay, ActionListener action){
-    // nextButton = new JButton();
-    // dialog1 = new JLabel();
     this.gamePlay = gamePlay;
 
-    // cardImageCenter = new JLabel();
-    // cardImageCenter.setBounds(150,15,118,167);
-
     dialog1.setText("This is your target's card");
-    // dialog1.setBounds(125, dialog1LocationY+15, dialog1Width, dialog1Height);
-
-    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    // nextButton.setText("Next");
 
     this.add(dialog1);
     this.add(cardImageCenter);

@@ -17,32 +17,17 @@ import gameProcessing.Card;
 import gameProcessing.CardProperties;
 
 public class HandmaidPanel extends CardPanelTemplate{
-  // GamePlay gamePlay;
   String handmaidImageLocation;
-  // JLabel cardImageCenter;
-  // private int targetChoice;
-  // JButton backButton;
   public HandmaidPanel(GamePlay gamePlay, ActionListener action, ActionListener backButtonAction){
-    // nextButton = new JButton();
-    // dialog = new JLabel();
     this.gamePlay = gamePlay;
 
-    // backButton = new JButton();
     backButton.addActionListener(backButtonAction);
-    // backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
-
-    // cardImageCenter = new JLabel();
 	  File currentDir = new File("");
     handmaidImageLocation = currentDir.getAbsolutePath() + "/Pictures/lovelettercards_Handmaid_small.jpg";
     cardImageCenter.setIcon(QuickGui.importImage(handmaidImageLocation));
-    // cardImageCenter.setBounds(150,15,118,167);
 
     dialog1.setText("The Handmaiden will protecting you for one round");
-    // dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
-
-    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    // nextButton.setText("Next");
     this.add(dialog1);
     this.add(cardImageCenter);
     this.add(nextButton);

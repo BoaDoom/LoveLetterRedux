@@ -10,13 +10,11 @@ import javax.swing.SwingConstants;
 import loveLetterGui.cardPanels.CardPanelTemplate;
 
 public class PlayerCountSelect extends CardPanelTemplate{    //slecting the amount of players in the game
-  // private JLabel dialog1;
   private PlayerCountButton twoPlayers;
   private PlayerCountButton threePlayers;
   private PlayerCountButton fourPlayers;
   public PlayerCountSelect(ActionListener action){
     dialog0.setText("Select the amount of players");
-    // dialog1.setBounds(125, dialog1LocationY, dialog1Width, dialog1Height);
     this.add(dialog0);
     dialog0.setVisible(true);
 

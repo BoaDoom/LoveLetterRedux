@@ -15,18 +15,10 @@ import gameProcessing.Players;
 import loveLetterGui.cardPanels.CardPanelTemplate;
 
 public class EndOfGameCheck extends CardPanelTemplate{
-  GamePlay gamePlay;
-  // JButton nextButton;
   public EndOfGameCheck(GamePlay gamePlay, ActionListener action){
     this.gamePlay = gamePlay;
-    // nextButton = new JButton();
     nextButton.setText("New Game");
-    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    // dialog1 = new JLabel();
-    // dialog1.setText("");
-    // dialog1.setHorizontalAlignment(SwingConstants.CENTER);
-    // dialog1.setBounds(100, dialog1LocationY, dialog1Width, dialog1Height);
 
     this.add(nextButton);
     this.add(dialog1);

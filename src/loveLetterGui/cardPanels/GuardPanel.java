@@ -17,23 +17,14 @@ import gameProcessing.CardProperties;
 public class GuardPanel extends CardPanelTemplate{
   ArrayList<CardGuessButtons> cardOptions;
 
-  // ActionListener listernerToMainGui;
   CardGuessAction cardGuessAction;
   private int targetChoice;
   public GuardPanel(GamePlay gamePlay, ActionListener action){
-    // nextButton = new JButton();
-    // dialog = new JLabel();
-    // listernerToMainGui = action;
     this.gamePlay = gamePlay;
 
     cardOptions = new ArrayList<CardGuessButtons>();
     cardGuessAction = new CardGuessAction();
-//
-    // nextButton.setBounds(150, buttonLocationY, buttonWidth, BUTTON_HEIGHT);
     nextButton.addActionListener(action);
-    // nextButton.setText("Next");
-    // nextButton.setVisible(false);
-    // this.add(nextButton);
     this.add(dialog0);
     this.add(nextButton);
 
@@ -52,15 +43,13 @@ public class GuardPanel extends CardPanelTemplate{
       CardGuessButtons cardOption = new CardGuessButtons(card.cardValue()-1);
       cardOption.setText(card.cardName());
       cardOption.addActionListener(cardGuessAction);
-      cardOption.setBounds((split*countVar)+(split/2)-((BUTTON_WIDTH-35)/2), yCordForButton, BUTTON_WIDTH-35, BUTTON_HEIGHT);
+      cardOption.setBounds((split*countVar)+(split/2)-((BUTTON_WIDTH-25)/2), yCordForButton, BUTTON_WIDTH-25, BUTTON_HEIGHT);
       cardOptions.add(cardOption);
       this.add(cardOption);
       cardOption.setVisible(true);
       countVar++;
     }
     cardOptions.get(0).setEnabled(false); //cannot guess guard as the card
-    // dialog0.setHorizontalAlignment(SwingConstants.CENTER);
-    // dialog0.setBounds(100, dialogLocationY, dialogWidth, dialogHeight);
     dialog0.setText("Guess your opponent's card");
   }
   public void action(int targetChoice){

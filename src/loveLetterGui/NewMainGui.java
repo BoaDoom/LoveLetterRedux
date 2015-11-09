@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 
 import gameProcessing.GamePlay;
 import loveLetterGui.cardPanels.*;
+import loveLetterGui.playerPanels.*;
 import loveLetterGui.subJPanelGui.*;
 import loveLetterGui.subJPanelGui.PlayCardSelect.CardChoiceButtons;
 import loveLetterGui.subJPanelGui.PlayerCountSelect.PlayerCountButton;
@@ -20,9 +21,14 @@ import javax.swing.JButton;
 
 public class NewMainGui{
 
+	public final int MAINFRAME_WIDTH = 786;
+	public final int MAINFRAME_HEIGHT = 593;
+
 	private JFrame mainFrame;
 	private JPanel gameBoard;
 	private JLabel testBox;
+
+	private MainPlayerTablePanel mainPlayerTablePanel;
 
 	//actons done to swap between GUI pannels
 	private NextAction nextAction;		//generic next button for progressing to next screen
@@ -46,7 +52,6 @@ public class NewMainGui{
 	private EndOfGameCheck endOfGameCheck;
 
 	//panels for each of the card's abilities
-	// private GenericCardPanel genericCardPanel;
 	private GuardPanel guardPanel;
 	private PriestPanel priestPanel;
 	private BaronPanel baronPanel;
@@ -68,16 +73,17 @@ public class NewMainGui{
 		testBox.setBounds(0, 0, 500, 50);
 		gameBoard.setLayout(null);
 		gameBoard.setBackground(new Color(39,134,39)); //color green
-		gameBoard.setBounds(0, 0, 786, 593);
+		gameBoard.setBounds(0, 0, MAINFRAME_WIDTH, MAINFRAME_HEIGHT);
 
 		//frame settings
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setBounds(300, 150, 786, 593);
+		mainFrame.setBounds(300, 150, MAINFRAME_WIDTH, MAINFRAME_HEIGHT);
 		mainFrame.setVisible(true);
 		mainFrame.getContentPane().setLayout(null);
 		mainFrame.getContentPane().add(gameBoard);
 		gameBoard.add(testBox);
 
+		mainPlayerTablePanel = new MainPlayerTablePanel(gamePlay);
 		//custom action classes for sub-gui class interactions with MainGui
 		nextAction = new NextAction() ;
 		playerCountedAction = new PlayerCountedAction();
@@ -122,7 +128,6 @@ public class NewMainGui{
 			endOfRound = new EndOfRound(gamePlay, endOfRoundAction);
 			endOfGameCheck = new EndOfGameCheck(gamePlay, endOfGameCheckAction);
 
-			// genericCardPanel = new GenericCardPanel(gamePlay, cardUseAction);
 			guardPanel = new GuardPanel(gamePlay, cardUseAction);
 			priestPanel = new PriestPanel(gamePlay, cardUseAction);
 			baronPanel = new BaronPanel(gamePlay, cardUseAction);
@@ -132,6 +137,7 @@ public class NewMainGui{
 			countessPanel = new CountessPanel(gamePlay, cardUseAction, backOutOfTargettingAction);
 			princessPanel = new PrincessPanel(gamePlay, cardUseAction, backOutOfTargettingAction);
 
+
 			//adding the turn rotation panels onto the gameBoard panel
 			gameBoard.add(nextPlayerCheck);
 			gameBoard.add(playCardSelect);
@@ -139,7 +145,6 @@ public class NewMainGui{
 			gameBoard.add(endOfRound);
 			gameBoard.add(endOfGameCheck);
 
-			// gameBoard.add(genericCardPanel);
 			gameBoard.add(guardPanel);
 			gameBoard.add(priestPanel);
 			gameBoard.add(baronPanel);
@@ -149,8 +154,8 @@ public class NewMainGui{
 			gameBoard.add(countessPanel);
 			gameBoard.add(princessPanel);
 
-
-
+			gameBoard.add(mainPlayerTablePanel);
+			
 			//turning off all panels except the player check, which sets off the reaction for the rest of the panels
 			nextPlayerCheck.on();
 			playCardSelect.off();
@@ -158,8 +163,7 @@ public class NewMainGui{
 			endOfRound.off();
 			endOfGameCheck.off();
 			cardUsePanelsOff();
-
-			// testCardGui.off();
+			refresh();
 		}
 	}
 	//=====================confirmed the correct player, after this the turn rotation starts
@@ -198,7 +202,6 @@ public class NewMainGui{
 		public void actionPerformed(ActionEvent e){
 			targetSelect.off();
 			cardUsePanelsOff();
-			// gamePlay.getCurrentPlayer().targetSelectUndo();
 			playCardSelect.on();
 		}
 	}
@@ -238,7 +241,36 @@ public class NewMainGui{
 				}
 			}
 		}
-
+	}
+	public void specialTargetingCards(){
+		int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();
+		switch(cardUsed){
+			case 4:
+			handmaidPanel.on();
+			break;
+			case 7:
+			countessPanel.on();
+			break;
+			case 8:
+			princessPanel.on();
+			break;
+		}
+	}
+	public void specialTargetingCardsAction(){
+		int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();
+		switch(cardUsed){
+			case 4:
+			handmaidPanel.action();
+			gamePlay.getCurrentPlayer().discardChoice();	//discards the card played and whos action is used
+			break;
+			case 7:
+			gamePlay.getCurrentPlayer().discardChoice();	//discards the card played and whos action is used
+			break;
+			case 8:
+			princessPanel.action();
+			gamePlay.getCurrentPlayer().discardChoice();	//discards the card played and whos action is used
+			break;
+		}
 	}
 	public class CardUseAction implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -290,33 +322,7 @@ public class NewMainGui{
 	}
 
 
-	public void specialTargetingCards(){
-		int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();
-		switch(cardUsed){
-			case 4:
-			handmaidPanel.on();
-			break;
-			case 7:
-			countessPanel.on();
-			break;
-			case 8:
-			princessPanel.on();
-			break;
-		}
-	}
 
-	public void specialTargetingCardsAction(){
-		int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();
-		gamePlay.getCurrentPlayer().discardChoice();	//discards the card played and whos action is used
-		switch(cardUsed){
-			case 4:
-			handmaidPanel.action();
-			break;
-			case 8:
-			princessPanel.action();
-			break;
-		}
-	}
 
 	public void refresh(){
 		gameBoard.validate();

@@ -80,14 +80,7 @@ public class Player {
 		return totalValue;
 	}
 
-	// public void targetSelectUndo(){ //puts 'used' card back in hand to redo targetting selection
-		// if ((discards.get(discards.size()-1).getValue() == 8)){ //for the times the princess card is played and needs to be undone
-		// 	active = true;
-		// 	undoDiscardCard();
-		// }
-		// undoDiscardCard();
 
-	//}
 
 	public void resetRound(){
 		hand.clear();

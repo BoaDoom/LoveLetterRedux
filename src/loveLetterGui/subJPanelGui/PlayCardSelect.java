@@ -16,15 +16,11 @@ import gameProcessing.GamePlay;
 import loveLetterGui.cardPanels.CardPanelTemplate;
 
 public class PlayCardSelect extends CardPanelTemplate{
-  GamePlay gamePlay;
-  // JLabel cardImage1;
-  // JLabel cardImage2;
   CardChoiceButtons cardButtonChoice1;
   CardChoiceButtons cardButtonChoice2;
   public PlayCardSelect(GamePlay gamePlay, ActionListener action){
     this.gamePlay = gamePlay;
     dialog3.setText("You are forced to discard the Countess");
-    // dialog3.setBounds(125, dialogLocationY+145, dialogWidth, dialogHeight);
 
     cardButtonChoice1 = new CardChoiceButtons("Choose", 0);
     cardButtonChoice2 = new CardChoiceButtons("Choose", 1);
@@ -37,18 +33,12 @@ public class PlayCardSelect extends CardPanelTemplate{
     cardButtonChoice1.setVisible(true);
     cardButtonChoice2.setVisible(true);
 
-    // cardImage2 = new JLabel();
-    // cardImage1 = new JLabel();
-
     this.add(dialog3);
     this.add(cardImage1);
     this.add(cardImage2);
     dialog3.setVisible(true);
     cardImage1.setVisible(true);
     cardImage2.setVisible(true);
-
-    // cardImage1.setBounds(50,75,118,167);
-    // cardImage2.setBounds(250,75,118,167);
     }
   public void on(){
     cardButtonChoice1.choiceEnable();  //turns it back on incase it was disabled previously
@@ -62,12 +52,6 @@ public class PlayCardSelect extends CardPanelTemplate{
   public void checkForCountess(){
     int card1 = gamePlay.getCurrentHand().get(0).getValue();  //left card
     int card2 = gamePlay.getCurrentHand().get(1).getValue();  //right card
-    // if ((card1 == 7)){
-    //    cardButtonChoice1.choiceDisable();   //sets it as disabled
-    // }
-    // if ((card2 == 7)){
-    //    cardButtonChoice2.choiceDisable();   //sets it as disabled
-    // }
 
     if (card1 == 7 && ((card2 == 5)||(card2 == 6))){ //left card button
       cardButtonChoice2.choiceDisable();   //sets other card as disabled

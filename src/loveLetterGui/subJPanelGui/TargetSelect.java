@@ -13,12 +13,8 @@ import gameProcessing.GamePlay;
 import loveLetterGui.cardPanels.CardPanelTemplate;
 
 public class TargetSelect extends CardPanelTemplate{
-  GamePlay gamePlay;
   Card playedCard;
-  // JLabel cardImageCenter;
-  // JLabel dialog0;
   PlayerTargetButtons noTargetButton;
-  // JButton backButton;
   ArrayList<PlayerTargetButtons> targetButtons;
   ArrayList<JLabel> playerNames;
   public TargetSelect(GamePlay gamePlay, ActionListener action, ActionListener backButtonAction){
@@ -26,12 +22,7 @@ public class TargetSelect extends CardPanelTemplate{
     targetButtons = new ArrayList<PlayerTargetButtons>();
     playerNames = new ArrayList<JLabel>();
 
-    // backButton = new JButton();
     backButton.addActionListener(backButtonAction);
-    // backButton.setBounds(20, buttonLocationY+80, BUTTON_WIDTH-15, BUTTON_HEIGHT-10);
-
-    // cardImageCenter = new JLabel();
-    // cardImageCenter.setBounds(150,15,118,167);
 
     noTargetButton = new PlayerTargetButtons(-1);
     noTargetButton.addActionListener(action);
@@ -39,8 +30,6 @@ public class TargetSelect extends CardPanelTemplate{
     noTargetButton.setText("Discard");
     noTargetButton.setVisible(false);
 
-    // dialog0 = new JLabel(""); //default dialog0
-    // dialog0.setBounds(125, dialog0LocationY+15, dialog0Width, dialog0Height);
     this.add(dialog0);
     this.add(cardImageCenter);
     this.add(noTargetButton);

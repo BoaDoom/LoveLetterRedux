@@ -15,29 +15,13 @@ import gameProcessing.Card;
 import gameProcessing.CardProperties;
 
 public class PrincePanel extends CardPanelTemplate{
-  // GamePlay gamePlay;
   Card chosenCard;
-  // JLabel cardImageCenter;
-  // JLabel dialog2;
-  // private int targetChoice;
   public PrincePanel(GamePlay gamePlay, ActionListener action){
-    // nextButton = new JButton();
-    // dialog = new JLabel();
-    // dialog2 = new JLabel();
     this.gamePlay = gamePlay;
-
-    // cardImageCenter = new JLabel();
-    // cardImageCenter.setBounds(150,15,118,167);
-
     dialog1.setText("Your target is forced to discard this card");
-    // dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
     dialog2.setText("It's the Princess! they are knocked out");
-    // dialog2.setBounds(125, dialogLocationY+25, dialogWidth, dialogHeight);
     princessDiscardOff();
-
-    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    // nextButton.setText("Next");
 
     this.add(dialog1);
     this.add(dialog2);
