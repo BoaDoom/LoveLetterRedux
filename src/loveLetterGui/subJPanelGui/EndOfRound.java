@@ -12,29 +12,34 @@ import gameProcessing.GamePlay;
 import gameProcessing.Player;
 import gameProcessing.Players;
 
-public class EndOfRound extends JPanelTemplate{
+import loveLetterGui.cardPanels.CardPanelTemplate;
+
+public class EndOfRound extends CardPanelTemplate{
   GamePlay gamePlay;
-  JButton nextButton;
-  JLabel dialog2;
+  // JButton nextButton;
+  // JLabel dialog2;
   public EndOfRound(GamePlay gamePlay, ActionListener action){
     this.gamePlay = gamePlay;
-    nextButton = new JButton();
-    nextButton.setText("Next");
-    nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
+    // nextButton = new JButton();
+    // nextButton.setText("Next");
+    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    dialog = new JLabel();
-    dialog.setText("");
-    dialog.setHorizontalAlignment(SwingConstants.CENTER);
-    dialog.setBounds(100, dialogLocationY, dialogWidth, dialogHeight);
+    // dialog1 = new JLabel();
+    // dialog1.setText("");
+    // dialog1.setHorizontalAlignment(SwingConstants.CENTER);
+    // dialog1.setBounds(100, dialog1LocationY, dialog1Width, dialog1Height);
 
-    dialog2 = new JLabel();
-    dialog2.setText("");
-    dialog2.setHorizontalAlignment(SwingConstants.CENTER);
-    dialog2.setBounds(100, (dialogLocationY+25), dialogWidth, dialogHeight);
+    // dialog2 = new JLabel();
+    // dialog2.setText("");
+    // dialog2.setHorizontalAlignment(SwingConstants.CENTER);
+    // dialog2.setBounds(100, (dialog1LocationY+25), dialog1Width, dialog1Height);
 
     this.add(nextButton);
-    this.add(dialog);
+    this.add(dialog1);
     this.add(dialog2);
+    nextButton.setVisible(true);
+    dialog1.setVisible(true);
+    dialog2.setVisible(true);
 
 
   }
@@ -47,7 +52,7 @@ public class EndOfRound extends JPanelTemplate{
         }
       }
       gamePlay.scorePoint(winner);
-      dialog.setText("Player " + (winner+1) + ", you win by knockout!");
+      dialog1.setText("Player " + (winner+1) + ", you win by knockout!");
     }
     else if (!gamePlay.checkForEnoughCards()){
       ArrayList<Player> remainingPlayers = new ArrayList<Player>();
@@ -56,7 +61,7 @@ public class EndOfRound extends JPanelTemplate{
           remainingPlayers.add(gamePlay.getRosterPlayer(i));
         }
       }
-      dialog.setText(compareCards(remainingPlayers));
+      dialog1.setText(compareCards(remainingPlayers));
     }
   }
 

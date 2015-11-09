@@ -17,36 +17,41 @@ import gameProcessing.Card;
 import gameProcessing.CardProperties;
 
 public class PrincessPanel extends CardPanelTemplate{
-  GamePlay gamePlay;
+  // GamePlay gamePlay;
   String princessImageLocation;
-  JLabel princessCardImage;
-  JButton backButton;
-  private int targetChoice;
+  // JLabel cardImageCenter;
+  // JButton backButton;
+  // private int targetChoice;
   public PrincessPanel(GamePlay gamePlay, ActionListener action, ActionListener backButtonAction){
-    nextButton = new JButton();
-    dialog = new JLabel();
+    // nextButton = new JButton();
+    // dialog = new JLabel();
     this.gamePlay = gamePlay;
 
-    backButton = new JButton();
+    // backButton = new JButton();
     backButton.addActionListener(backButtonAction);
-    backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
+    // backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
 
-    princessCardImage = new JLabel();
+    // cardImageCenter = new JLabel();
 	  File currentDir = new File("");
     princessImageLocation = currentDir.getAbsolutePath() + "/Pictures/lovelettercards_Princess_small.jpg";
-    princessCardImage.setIcon(QuickGui.importImage(princessImageLocation));
-    princessCardImage.setBounds(150,15,118,167);
+    cardImageCenter.setIcon(QuickGui.importImage(princessImageLocation));
+    // cardImageCenter.setBounds(150,15,118,167);
 
-    dialog = new JLabel("The Princess has been discarded, you are eliminated");
-    dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
+    dialog1.setText("The Princess has been discarded, you are eliminated");
+    // dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
 
-    nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
+    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    nextButton.setText("Next");
-    this.add(dialog);
-    this.add(princessCardImage);
+    // nextButton.setText("Next");
+    this.add(dialog1);
+    this.add(cardImageCenter);
     this.add(nextButton);
     this.add(backButton);
+
+    dialog1.setVisible(true);
+    cardImageCenter.setVisible(true);
+    nextButton.setVisible(true);
+    backButton.setVisible(true);
 
   }
   public void action(){

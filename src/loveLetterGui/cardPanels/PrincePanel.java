@@ -15,38 +15,43 @@ import gameProcessing.Card;
 import gameProcessing.CardProperties;
 
 public class PrincePanel extends CardPanelTemplate{
-  GamePlay gamePlay;
+  // GamePlay gamePlay;
   Card chosenCard;
-  JLabel chosenCardImage;
-  JLabel dialog2;
-  private int targetChoice;
+  // JLabel cardImageCenter;
+  // JLabel dialog2;
+  // private int targetChoice;
   public PrincePanel(GamePlay gamePlay, ActionListener action){
-    nextButton = new JButton();
-    dialog = new JLabel();
-    dialog2 = new JLabel();
+    // nextButton = new JButton();
+    // dialog = new JLabel();
+    // dialog2 = new JLabel();
     this.gamePlay = gamePlay;
 
-    chosenCardImage = new JLabel();
-    chosenCardImage.setBounds(150,15,118,167);
+    // cardImageCenter = new JLabel();
+    // cardImageCenter.setBounds(150,15,118,167);
 
-    dialog = new JLabel("Your target is forced to discard this card");
-    dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
-    dialog2 = new JLabel("It's the Princess! they are knocked out");
-    dialog2.setBounds(125, dialogLocationY+25, dialogWidth, dialogHeight);
+    dialog1.setText("Your target is forced to discard this card");
+    // dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
+    dialog2.setText("It's the Princess! they are knocked out");
+    // dialog2.setBounds(125, dialogLocationY+25, dialogWidth, dialogHeight);
     princessDiscardOff();
 
-    nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
+    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    nextButton.setText("Next");
+    // nextButton.setText("Next");
 
-    this.add(dialog);
+    this.add(dialog1);
     this.add(dialog2);
-    this.add(chosenCardImage);
+    this.add(cardImageCenter);
     this.add(nextButton);
+
+    dialog1.setVisible(true);
+    dialog2.setVisible(true);
+    cardImageCenter.setVisible(true);
+    nextButton.setVisible(true);
   }
   public void action(int targetChoice){
     this.chosenCard = gamePlay.getRosterPlayer(targetChoice).getCard(0);
-    chosenCardImage.setIcon(chosenCard.getImage()); //turns the discarded/selected card that is being used against someone
+    cardImageCenter.setIcon(chosenCard.getImage()); //turns the discarded/selected card that is being used against someone
     gamePlay.getRosterPlayer(targetChoice).discardCard();
     if (gamePlay.getRosterPlayer(targetChoice).getDiscardedCard().getValue() == 8){ //checks if the forced card is a princess, which loses the person the round
       princessDiscardOn();

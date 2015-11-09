@@ -10,13 +10,15 @@ import javax.swing.JPanel;
 import gameProcessing.Card;
 import gameProcessing.GamePlay;
 
-public class TargetSelect extends JPanelTemplate{
+import loveLetterGui.cardPanels.CardPanelTemplate;
+
+public class TargetSelect extends CardPanelTemplate{
   GamePlay gamePlay;
   Card playedCard;
-  JLabel playedCardImage;
-  JLabel dialog;
+  // JLabel cardImageCenter;
+  // JLabel dialog0;
   PlayerTargetButtons noTargetButton;
-  JButton backButton;
+  // JButton backButton;
   ArrayList<PlayerTargetButtons> targetButtons;
   ArrayList<JLabel> playerNames;
   public TargetSelect(GamePlay gamePlay, ActionListener action, ActionListener backButtonAction){
@@ -24,25 +26,29 @@ public class TargetSelect extends JPanelTemplate{
     targetButtons = new ArrayList<PlayerTargetButtons>();
     playerNames = new ArrayList<JLabel>();
 
-    backButton = new JButton();
+    // backButton = new JButton();
     backButton.addActionListener(backButtonAction);
-    backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
+    // backButton.setBounds(20, buttonLocationY+80, BUTTON_WIDTH-15, BUTTON_HEIGHT-10);
 
-    playedCardImage = new JLabel();
-    playedCardImage.setBounds(150,15,118,167);
+    // cardImageCenter = new JLabel();
+    // cardImageCenter.setBounds(150,15,118,167);
 
     noTargetButton = new PlayerTargetButtons(-1);
     noTargetButton.addActionListener(action);
-    noTargetButton.setBounds(150, buttonLocationY+60, buttonWidth, buttonHeight);
+    noTargetButton.setBounds(buttonNextBounds);
     noTargetButton.setText("Discard");
     noTargetButton.setVisible(false);
 
-    dialog = new JLabel(""); //default dialog
-    dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
-    this.add(dialog);
-    this.add(playedCardImage);
+    // dialog0 = new JLabel(""); //default dialog0
+    // dialog0.setBounds(125, dialog0LocationY+15, dialog0Width, dialog0Height);
+    this.add(dialog0);
+    this.add(cardImageCenter);
     this.add(noTargetButton);
     this.add(backButton);
+    dialog0.setVisible(true);
+    cardImageCenter.setVisible(true);
+    noTargetButton.setVisible(true);
+    backButton.setVisible(true);
 
     int split = (panelLength/gamePlay.getPlayerCount());
     for (int i=0; i<gamePlay.getPlayerCount(); i++){    //loop for placing the correct amount of buttons and corisponding playerNames
@@ -50,9 +56,9 @@ public class TargetSelect extends JPanelTemplate{
       player.addActionListener(action);
       JLabel playerName = new JLabel("Player "+(i+1));
       targetButtons.add(player);
-      targetButtons.get(i).setBounds((split*i)+((split/2)-(buttonWidth-25)/2), 250, buttonWidth-25, buttonHeight);
+      targetButtons.get(i).setBounds((split*i)+((split/2)-(BUTTON_WIDTH-25)/2), buttonChoice1LocationY, BUTTON_WIDTH-25, BUTTON_HEIGHT);
       playerNames.add(playerName);
-      playerNames.get(i).setBounds((split*i)+((split/2)-(buttonWidth-25)/2)+25, 280, buttonWidth-25, buttonHeight);
+      playerNames.get(i).setBounds((split*i)+((split/2)-(BUTTON_WIDTH-25)/2)+25, buttonChoice1LocationY+30, BUTTON_WIDTH-25, BUTTON_HEIGHT);
       this.add(targetButtons.get(i));
       this.add(playerNames.get(i));
     }
@@ -61,7 +67,7 @@ public class TargetSelect extends JPanelTemplate{
   	noTargetButton.setVisible(false);
     targetButtonsOn();
     this.playedCard = gamePlay.getCurrentPlayer().getPlayedCard();
-    playedCardImage.setIcon(playedCard.getImage()); //turns the discarded/selected card that is being used against someone
+    cardImageCenter.setIcon(playedCard.getImage()); //turns the discarded/selected card that is being used against someone
     int tempCounter = 0;    //counting to see how many targets are disabled
     for (int i=0; i<gamePlay.getPlayerCount(); i++){//sets the button names to show availibility of the targets
       targetButtons.get(i).setText("Use On");
@@ -89,12 +95,12 @@ public class TargetSelect extends JPanelTemplate{
     }
     if (tempCounter >= gamePlay.getPlayerCount()){
       targetButtonsOff();
-      dialog.setText("You have no one to use this card on");
+      dialog0.setText("You have no one to use this card on");
       noTargetButton.setVisible(true);
 
     }
     else{
-      dialog.setText("Choose a player to play card on");
+      dialog0.setText("Choose a player to play card on");
     }
   }
 

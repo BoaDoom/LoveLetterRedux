@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.Rectangle;
 
 import gameProcessing.GamePlay;
 import gameProcessing.Player;
@@ -15,24 +16,30 @@ import gameProcessing.CardProperties;
 
 public class GuardPanel extends CardPanelTemplate{
   ArrayList<CardGuessButtons> cardOptions;
-  GamePlay gamePlay;
-  ActionListener listernerToMainGui;
+
+  // ActionListener listernerToMainGui;
   CardGuessAction cardGuessAction;
   private int targetChoice;
   public GuardPanel(GamePlay gamePlay, ActionListener action){
-    nextButton = new JButton();
-    dialog = new JLabel();
-    listernerToMainGui = action;
+    // nextButton = new JButton();
+    // dialog = new JLabel();
+    // listernerToMainGui = action;
     this.gamePlay = gamePlay;
 
     cardOptions = new ArrayList<CardGuessButtons>();
     cardGuessAction = new CardGuessAction();
-
-    nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
+//
+    // nextButton.setBounds(150, buttonLocationY, buttonWidth, BUTTON_HEIGHT);
     nextButton.addActionListener(action);
-    nextButton.setText("Next");
-    nextButton.setVisible(false);
+    // nextButton.setText("Next");
+    // nextButton.setVisible(false);
+    // this.add(nextButton);
+    this.add(dialog0);
     this.add(nextButton);
+
+    nextButton.setVisible(true);
+    dialog0.setVisible(true);
+    nextButton.setVisible(true);
 
     int split = (panelLength/4);
     int countVar = 0;
@@ -45,24 +52,23 @@ public class GuardPanel extends CardPanelTemplate{
       CardGuessButtons cardOption = new CardGuessButtons(card.cardValue()-1);
       cardOption.setText(card.cardName());
       cardOption.addActionListener(cardGuessAction);
-      cardOption.setBounds((split*countVar)+((split/2)-(buttonWidth-25)/2), yCordForButton, buttonWidth-25, buttonHeight);
+      cardOption.setBounds((split*countVar)+(split/2)-((BUTTON_WIDTH-35)/2), yCordForButton, BUTTON_WIDTH-35, BUTTON_HEIGHT);
       cardOptions.add(cardOption);
       this.add(cardOption);
+      cardOption.setVisible(true);
       countVar++;
     }
     cardOptions.get(0).setEnabled(false); //cannot guess guard as the card
-    dialog.setHorizontalAlignment(SwingConstants.CENTER);
-    dialog.setBounds(100, dialogLocationY, dialogWidth, dialogHeight);
-    dialog.setText("Guess your opponent's card");
-    this.add(dialog);
-    this.add(nextButton);
+    // dialog0.setHorizontalAlignment(SwingConstants.CENTER);
+    // dialog0.setBounds(100, dialogLocationY, dialogWidth, dialogHeight);
+    dialog0.setText("Guess your opponent's card");
   }
   public void action(int targetChoice){
     this.targetChoice = targetChoice;
     nextButtonOff();
+    dialog0.setText("Guess your opponent's card");
     cardOptionsOn();
-    dialog.setText("Guess your opponent's card");
-    dialog.setText("Player chosen: "+(gamePlay.getRosterPlayer(targetChoice).getPlayerNumber()+1)+ ", Card:"+gamePlay.getRosterPlayer(targetChoice).getCard(0).getValue());
+    dialog0.setText("Cheat: Player chosen: "+(gamePlay.getRosterPlayer(targetChoice).getPlayerNumber()+1)+ ", Card:"+gamePlay.getRosterPlayer(targetChoice).getCard(0).getValue());
 
   }
 
@@ -71,11 +77,11 @@ public class GuardPanel extends CardPanelTemplate{
 		public void actionPerformed(ActionEvent e){
 			Integer guessedCard = new Integer(((CardGuessButtons) e.getSource()).getChoice()+1); //collects which card was guessed by the buytton pressed
       if (guessedCard == gamePlay.getRosterPlayer(targetChoice).getCard(0).getValue()){ // compares the targetted player's hand with
-        dialog.setText("You are correct! Player "+(targetChoice+1)+" is out of the round");
+        dialog0.setText("You are correct! Player "+(targetChoice+1)+" is out of the round");
         gamePlay.getRosterPlayer(targetChoice).eliminate();
       }
       else{
-        dialog.setText("You guessed incorrectly, your turn is over");
+        dialog0.setText("You guessed incorrectly, your turn is over");
       }
       cardOptionsOff();
       nextButton.setVisible(true);

@@ -15,31 +15,35 @@ import gameProcessing.Card;
 import gameProcessing.CardProperties;
 
 public class PriestPanel extends CardPanelTemplate{
-  GamePlay gamePlay;
-  Card hiddenCard;
-  JLabel hiddenCardImage;
-  private int targetChoice;
+  // GamePlay gamePlay;
+  Card opponentsCard;
+  // JLabel cardImageCenter;
+  // private int targetChoice;
   public PriestPanel(GamePlay gamePlay, ActionListener action){
-    nextButton = new JButton();
-    dialog = new JLabel();
+    // nextButton = new JButton();
+    // dialog1 = new JLabel();
     this.gamePlay = gamePlay;
 
-    hiddenCardImage = new JLabel();
-    hiddenCardImage.setBounds(150,15,118,167);
+    // cardImageCenter = new JLabel();
+    // cardImageCenter.setBounds(150,15,118,167);
 
-    dialog = new JLabel("This is your target's card");
-    dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
+    dialog1.setText("This is your target's card");
+    // dialog1.setBounds(125, dialog1LocationY+15, dialog1Width, dialog1Height);
 
-    nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
+    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    nextButton.setText("Next");
+    // nextButton.setText("Next");
 
-    this.add(dialog);
-    this.add(hiddenCardImage);
+    this.add(dialog1);
+    this.add(cardImageCenter);
     this.add(nextButton);
+
+    dialog1.setVisible(true);
+    cardImageCenter.setVisible(true);
+    nextButton.setVisible(true);
   }
   public void action(int targetChoice){
-    this.hiddenCard = gamePlay.getRosterPlayer(targetChoice).getCard(0);
-    hiddenCardImage.setIcon(hiddenCard.getImage()); //turns the discarded/selected card that is being used against someone
+    this.opponentsCard = gamePlay.getRosterPlayer(targetChoice).getCard(0);
+    cardImageCenter.setIcon(opponentsCard.getImage()); //turns the discarded/selected card that is being used against someone
   }
 }

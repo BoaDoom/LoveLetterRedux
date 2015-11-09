@@ -13,42 +13,49 @@ import javax.swing.JPanel;
 
 import gameProcessing.GamePlay;
 
-public class PlayCardSelect extends JPanelTemplate{
+import loveLetterGui.cardPanels.CardPanelTemplate;
+
+public class PlayCardSelect extends CardPanelTemplate{
   GamePlay gamePlay;
-  JLabel leftCard;
-  JLabel rightCard;
-  CardChoiceButtons leftButton;
-  CardChoiceButtons rightButton;
+  // JLabel cardImage1;
+  // JLabel cardImage2;
+  CardChoiceButtons cardButtonChoice1;
+  CardChoiceButtons cardButtonChoice2;
   public PlayCardSelect(GamePlay gamePlay, ActionListener action){
     this.gamePlay = gamePlay;
-    dialog = new JLabel("You are forced to discard the Countess");
-    dialog.setBounds(125, dialogLocationY+145, dialogWidth, dialogHeight);
+    dialog3.setText("You are forced to discard the Countess");
+    // dialog3.setBounds(125, dialogLocationY+145, dialogWidth, dialogHeight);
 
-    leftButton = new CardChoiceButtons("Choose", 0);
-    rightButton = new CardChoiceButtons("Choose", 1);
-    leftButton.setBounds(50, (buttonLocationY+50), buttonWidth, buttonHeight);
-    rightButton.setBounds(250, (buttonLocationY+50), buttonWidth, buttonHeight);
-    leftButton.addActionListener(action);
-    rightButton.addActionListener(action);
-    this.add(leftButton);
-    this.add(rightButton);
+    cardButtonChoice1 = new CardChoiceButtons("Choose", 0);
+    cardButtonChoice2 = new CardChoiceButtons("Choose", 1);
+    cardButtonChoice1.setBounds(buttonChoice1Bounds);
+    cardButtonChoice2.setBounds(buttonChoice2Bounds);
+    cardButtonChoice1.addActionListener(action);
+    cardButtonChoice2.addActionListener(action);
+    this.add(cardButtonChoice1);
+    this.add(cardButtonChoice2);
+    cardButtonChoice1.setVisible(true);
+    cardButtonChoice2.setVisible(true);
 
-    rightCard = new JLabel();
-    leftCard = new JLabel();
+    // cardImage2 = new JLabel();
+    // cardImage1 = new JLabel();
 
-    this.add(dialog);
-    this.add(leftCard);
-    this.add(rightCard);
+    this.add(dialog3);
+    this.add(cardImage1);
+    this.add(cardImage2);
+    dialog3.setVisible(true);
+    cardImage1.setVisible(true);
+    cardImage2.setVisible(true);
 
-    leftCard.setBounds(50,75,118,167);
-    rightCard.setBounds(250,75,118,167);
+    // cardImage1.setBounds(50,75,118,167);
+    // cardImage2.setBounds(250,75,118,167);
     }
   public void on(){
-    leftButton.choiceEnable();  //turns it back on incase it was disabled previously
-    rightButton.choiceEnable(); //turns it back on incase it was disabled previously
-    dialog.setVisible(false);   //instruction dialog turned off by default
-    leftCard.setIcon(gamePlay.getCurrentHand().get(0).getImage());
-    rightCard.setIcon(gamePlay.getCurrentHand().get(1).getImage());
+    cardButtonChoice1.choiceEnable();  //turns it back on incase it was disabled previously
+    cardButtonChoice2.choiceEnable(); //turns it back on incase it was disabled previously
+    dialog3.setVisible(false);   //instruction dialog turned off by default
+    cardImage1.setIcon(gamePlay.getCurrentHand().get(0).getImage());
+    cardImage2.setIcon(gamePlay.getCurrentHand().get(1).getImage());
     checkForCountess(); //check to see if it needs you to force a countess play if king or prince are in hand
     this.setVisible(true);
   }
@@ -56,19 +63,19 @@ public class PlayCardSelect extends JPanelTemplate{
     int card1 = gamePlay.getCurrentHand().get(0).getValue();  //left card
     int card2 = gamePlay.getCurrentHand().get(1).getValue();  //right card
     // if ((card1 == 7)){
-    //    leftButton.choiceDisable();   //sets it as disabled
+    //    cardButtonChoice1.choiceDisable();   //sets it as disabled
     // }
     // if ((card2 == 7)){
-    //    rightButton.choiceDisable();   //sets it as disabled
+    //    cardButtonChoice2.choiceDisable();   //sets it as disabled
     // }
 
     if (card1 == 7 && ((card2 == 5)||(card2 == 6))){ //left card button
-      rightButton.choiceDisable();   //sets other card as disabled
-      dialog.setVisible(true);
+      cardButtonChoice2.choiceDisable();   //sets other card as disabled
+      dialog3.setVisible(true);
     }
     else if (card2 == 7 && ((card1 == 5)||(card1 == 6))){ //right card button
-      leftButton.choiceDisable();   //sets other card as disabled
-      dialog.setVisible(true);
+      cardButtonChoice1.choiceDisable();   //sets other card as disabled
+      dialog3.setVisible(true);
     }
   }
   public class CardChoiceButtons extends JButton{

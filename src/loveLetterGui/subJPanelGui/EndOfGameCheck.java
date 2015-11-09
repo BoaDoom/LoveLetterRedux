@@ -12,25 +12,29 @@ import gameProcessing.GamePlay;
 import gameProcessing.Player;
 import gameProcessing.Players;
 
-public class EndOfGameCheck extends JPanelTemplate{
+import loveLetterGui.cardPanels.CardPanelTemplate;
+
+public class EndOfGameCheck extends CardPanelTemplate{
   GamePlay gamePlay;
-  JButton nextButton;
+  // JButton nextButton;
   public EndOfGameCheck(GamePlay gamePlay, ActionListener action){
     this.gamePlay = gamePlay;
-    nextButton = new JButton();
+    // nextButton = new JButton();
     nextButton.setText("New Game");
-    nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
+    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    dialog = new JLabel();
-    dialog.setText("");
-    dialog.setHorizontalAlignment(SwingConstants.CENTER);
-    dialog.setBounds(100, dialogLocationY, dialogWidth, dialogHeight);
+    // dialog1 = new JLabel();
+    // dialog1.setText("");
+    // dialog1.setHorizontalAlignment(SwingConstants.CENTER);
+    // dialog1.setBounds(100, dialog1LocationY, dialog1Width, dialog1Height);
 
     this.add(nextButton);
-    this.add(dialog);
+    this.add(dialog1);
+    nextButton.setVisible(true);
+    dialog1.setVisible(true);
   }
   public void action(){
-    dialog.setText("The game is over, Player "+ (gamePlay.getLastWinner()+1) + " won");
+    dialog1.setText("The game is over, Player "+ (gamePlay.getLastWinner()+1) + " won");
   }
 
 

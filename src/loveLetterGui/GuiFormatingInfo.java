@@ -68,6 +68,19 @@ public class GuiFormatingInfo extends JPanel{
 	public static final int buttonChoice2LocationX = ((panelLength/4)*3)-((buttonChoice1Length)/2);
 	Rectangle buttonChoice2Bounds = new Rectangle(buttonChoice2LocationX, buttonChoice1LocationY, buttonChoice1Length, buttonChoice1Height);
 
+	public static final int buttonNextLength = BUTTON_WIDTH;
+	public static final int buttonNextHeight = BUTTON_HEIGHT;
+	public static final int buttonNextLocationX = cardCenterLocationX;
+	public static final int buttonNextLocationY = (panelHeight-40);
+	Rectangle buttonNextBounds = new Rectangle(buttonNextLocationX, buttonNextLocationY, buttonNextLength, buttonNextHeight);
+
+	public static final int buttonBackLength = 89;
+	public static final int buttonBackHeight = 23;
+	public static final int buttonBackLocationX = 10;
+	public static final int buttonBackLocationY = (panelHeight-35);
+	Rectangle buttonBackBounds = new Rectangle(buttonBackLocationX, buttonBackLocationY, buttonBackLength, buttonBackHeight);
+
+
 
 	public GuiFormatingInfo() {
 	    this.setBackground(new Color(39,100,39));
@@ -113,5 +126,13 @@ public class GuiFormatingInfo extends JPanel{
 	    JButton buttonChoice2 = new JButton("Choice 2");
 	    buttonChoice2.setBounds(buttonChoice2Bounds);
 	    add(buttonChoice2);
+
+	    JButton btnBack = new JButton("back");
+	    btnBack.setBounds(10, 341, 89, 23);
+	    add(btnBack);
+
+	    JButton next = new JButton("next");
+	    next.setBounds(buttonNextBounds);
+	    add(next);
 	}
 }

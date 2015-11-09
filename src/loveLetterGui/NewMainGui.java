@@ -207,6 +207,7 @@ public class NewMainGui{
 		public void actionPerformed(ActionEvent e) {
 			targetSelect.off();
 			Integer target = new Integer(((PlayerTargetButtons) e.getSource()).getChoice()); //collects which target was chosen by the button pressed
+			gamePlay.getCurrentPlayer().discardChoice();	//discards the card played and whos action is used
 			if (target == -1){		//if the card was played without any action or target
 				gamePlay.endOfTurn();	//rotates to next player
 				nextPlayerCheck.on();	//starts next players turn if the round isn't over
@@ -215,8 +216,8 @@ public class NewMainGui{
 				int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();		//turns on the appropriate card action panel
 				switch(cardUsed){
 					case 1:      //Guard
-					guardPanel.action(target);
 					guardPanel.on();
+					guardPanel.action(target);
 					break;
 					case 2:      //Priest
 					priestPanel.on();
@@ -242,7 +243,6 @@ public class NewMainGui{
 	public class CardUseAction implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			specialTargetingCardsAction();	//performs the action of self-use only cards after the card is confirmed
-			gamePlay.getCurrentPlayer().discardChoice();
 			cardUsePanelsOff();
 			if (gamePlay.checkToContinueRound()){
 				gamePlay.endOfTurn();	//rotates to next player
@@ -307,6 +307,7 @@ public class NewMainGui{
 
 	public void specialTargetingCardsAction(){
 		int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();
+		gamePlay.getCurrentPlayer().discardChoice();	//discards the card played and whos action is used
 		switch(cardUsed){
 			case 4:
 			handmaidPanel.action();

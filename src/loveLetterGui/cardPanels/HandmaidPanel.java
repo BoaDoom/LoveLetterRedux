@@ -17,36 +17,41 @@ import gameProcessing.Card;
 import gameProcessing.CardProperties;
 
 public class HandmaidPanel extends CardPanelTemplate{
-  GamePlay gamePlay;
+  // GamePlay gamePlay;
   String handmaidImageLocation;
-  JLabel handmaidCardImage;
-  private int targetChoice;
-  JButton backButton;
+  // JLabel cardImageCenter;
+  // private int targetChoice;
+  // JButton backButton;
   public HandmaidPanel(GamePlay gamePlay, ActionListener action, ActionListener backButtonAction){
-    nextButton = new JButton();
-    dialog = new JLabel();
+    // nextButton = new JButton();
+    // dialog = new JLabel();
     this.gamePlay = gamePlay;
 
-    backButton = new JButton();
+    // backButton = new JButton();
     backButton.addActionListener(backButtonAction);
-    backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
+    // backButton.setBounds(20, buttonLocationY+80, buttonWidth-15, buttonHeight-10);
 
-    handmaidCardImage = new JLabel();
+    // cardImageCenter = new JLabel();
 	  File currentDir = new File("");
     handmaidImageLocation = currentDir.getAbsolutePath() + "/Pictures/lovelettercards_Handmaid_small.jpg";
-    handmaidCardImage.setIcon(QuickGui.importImage(handmaidImageLocation));
-    handmaidCardImage.setBounds(150,15,118,167);
+    cardImageCenter.setIcon(QuickGui.importImage(handmaidImageLocation));
+    // cardImageCenter.setBounds(150,15,118,167);
 
-    dialog = new JLabel("The Handmaiden is now protecting you for one round");
-    dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
+    dialog1.setText("The Handmaiden will protecting you for one round");
+    // dialog.setBounds(125, dialogLocationY+15, dialogWidth, dialogHeight);
 
-    nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
+    // nextButton.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
     nextButton.addActionListener(action);
-    nextButton.setText("Next");
-    this.add(dialog);
-    this.add(handmaidCardImage);
+    // nextButton.setText("Next");
+    this.add(dialog1);
+    this.add(cardImageCenter);
     this.add(nextButton);
     this.add(backButton);
+
+    dialog1.setVisible(true);
+    cardImageCenter.setVisible(true);
+    nextButton.setVisible(true);
+    backButton.setVisible(true);
 
 
   }

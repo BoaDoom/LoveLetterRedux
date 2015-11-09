@@ -7,22 +7,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class PlayerCountSelect extends JPanelTemplate{    //slecting the amount of players in the game
-  private JLabel dialog;
+import loveLetterGui.cardPanels.CardPanelTemplate;
+
+public class PlayerCountSelect extends CardPanelTemplate{    //slecting the amount of players in the game
+  // private JLabel dialog1;
   private PlayerCountButton twoPlayers;
   private PlayerCountButton threePlayers;
   private PlayerCountButton fourPlayers;
   public PlayerCountSelect(ActionListener action){
-    dialog = new JLabel("Select the amount of players");
-    dialog.setBounds(125, dialogLocationY, dialogWidth, dialogHeight);
-    this.add(dialog);
+    dialog0.setText("Select the amount of players");
+    // dialog1.setBounds(125, dialog1LocationY, dialog1Width, dialog1Height);
+    this.add(dialog0);
+    dialog0.setVisible(true);
 
     twoPlayers = new PlayerCountButton("Two players", 2);
     threePlayers = new PlayerCountButton("Three players", 3);
     fourPlayers = new PlayerCountButton("Four players", 4);
-    twoPlayers.setBounds(0, buttonLocationY, buttonWidth, buttonHeight);
-    threePlayers.setBounds(150, buttonLocationY, buttonWidth, buttonHeight);
-    fourPlayers.setBounds(300, buttonLocationY, buttonWidth, buttonHeight);
+    twoPlayers.setBounds((panelLength/6)-(BUTTON_WIDTH/2), BUTTON_CHOICE_YCORD, BUTTON_WIDTH, BUTTON_HEIGHT);
+    threePlayers.setBounds(((panelLength/6)*3)-(BUTTON_WIDTH/2), BUTTON_CHOICE_YCORD, BUTTON_WIDTH, BUTTON_HEIGHT);
+    fourPlayers.setBounds(((panelLength/6)*5)-(BUTTON_WIDTH/2), BUTTON_CHOICE_YCORD, BUTTON_WIDTH, BUTTON_HEIGHT);
     twoPlayers.addActionListener(action);
     threePlayers.addActionListener(action);
     fourPlayers.addActionListener(action);
