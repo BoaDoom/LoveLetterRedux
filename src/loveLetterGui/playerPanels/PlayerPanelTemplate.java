@@ -1,49 +1,46 @@
 package loveLetterGui.playerPanels;
 
 import java.awt.Color;
-import java.awt.List;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import gameProcessing.Card;
-import gameProcessing.GamePlay;
-import loveLetterGui.NewMainGui;
-import loveLetterGui.QuickGui;
 import javax.swing.JRadioButton;
 
-public class MainPlayerTablePanel extends JPanel{
-	private final int DISCARD_PILE_XCORD = 600;
-	private final int DISCARD_PILE_YCORD = 15;
-	final static int DISCARD_PILE_X_DISPLACEMENT = 20;
-	final static int DISCARD_PILE_Y_DISPLACEMENT = 20;
+import gameProcessing.GamePlay;
 
-	private final int SCORE_XCORD = 6;
-	private final int SCORE_YCORD = 15;
-	final static int SCORE_X_DISPLACEMENT = 21;
+public class PlayerPanelTemplate extends JPanel{
+	private int DISCARD_PILE_XCORD;
+	private int DISCARD_PILE_YCORD;
+	private final int DISCARD_PILE_X_DISPLACEMENT = MainPlayerTablePanel.DISCARD_PILE_X_DISPLACEMENT;
+	private final int DISCARD_PILE_Y_DISPLACEMENT = MainPlayerTablePanel.DISCARD_PILE_Y_DISPLACEMENT;
 
-  final static int MAX_SHOWN_DISCARD_COUNT = 10; //the size of the discards shown in a game
+	private int SCORE_XCORD;
+	private int SCORE_YCORD;
+	private final int SCORE_X_DISPLACEMENT = MainPlayerTablePanel.SCORE_X_DISPLACEMENT;
 
-  private final int PLAYERTABLE_HEIGHT = 395;
-  private final int PLAYERTABLE_WIDTH = 786;
+  private final int MAX_SHOWN_DISCARD_COUNT = MainPlayerTablePanel.MAX_SHOWN_DISCARD_COUNT; //the size of the discards shown in a game
 
-  public static final int CARD_LENGTH = 122/2;
-  public static final int CARD_HEIGHT = 166/2;
+  private int PLAYERTABLE_HEIGHT;
+  private int PLAYERTABLE_WIDTH;
+
+  public static final int CARD_LENGTH = MainPlayerTablePanel.CARD_LENGTH;
+  public static final int CARD_HEIGHT = MainPlayerTablePanel.CARD_HEIGHT;
 
   JLabel scoreText;
   JLabel[] discardPile;
   JRadioButton[] scoreCircle;
   GamePlay gamePlay;
 
+  int playerNumber;
 
-  public MainPlayerTablePanel(GamePlay gamePlay){
+
+  public PlayerPanelTemplate(GamePlay gamePlay, int playerNumber){
     discardPile = new JLabel[MAX_SHOWN_DISCARD_COUNT];
     scoreCircle = new JRadioButton[gamePlay.getWinRequirement()];
-
+    this.playerNumber = playerNumber;
     scoreText = new JLabel();    ///change to dynamic name changing later
-    scoreText.setText("Player "+ (gamePlay.getCurrentPlayer().getPlayerNumber()+1) +" Score:");
-    scoreText.setBounds(5,0,100, 15);
+//    scoreText.setText("Player "+ (gamePlay.getCurrentPlayer().getPlayerNumber()+1) +" Score:");
+//    scoreText.setBounds(5,0,100, 15);
     this.add(scoreText);
 
     this.gamePlay = gamePlay;
@@ -91,6 +88,12 @@ public class MainPlayerTablePanel extends JPanel{
       }
     }
     this.repaint();
+  }
+  public void rotatePlayer(){
+    playerNumber--;
+    if (playerNumber < 0){
+      playerNumber = gamePlay.getPlayerCount();
+    }
   }
 
   public void resetPlayerBoard(){

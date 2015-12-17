@@ -30,6 +30,11 @@ public class NewMainGui{
 	private JPanel gameBoard;
 	private JLabel testBox;
 
+	private LeftPlayerPanel leftPlayerPanel;
+	private RightPlayerPanel rightPlayerPanel;
+	private TopPlayerPanel topPlayerPanel;
+	private ArrayList<PlayerPanelTemplate> playerBoards;
+
 	private MainPlayerTablePanel mainPlayerTablePanel;
 
 	//actons done to swap between GUI pannels
@@ -140,7 +145,27 @@ public class NewMainGui{
 			princessPanel = new PrincessPanel(gamePlay, cardUseAction, backOutOfTargettingAction);
 
 			mainPlayerTablePanel = new MainPlayerTablePanel(gamePlay);
-
+			playerBoards = new ArrayList<PlayerPanelTemplate>();
+			switch (count){
+				case 2:
+				topPlayerPanel = new TopPlayerPanel(gamePlay, 1);
+				playerBoards.add(topPlayerPanel);
+				break;
+				case 3:
+				rightPlayerPanel = new RightPlayerPanel(gamePlay, 2);
+				leftPlayerPanel = new LeftPlayerPanel(gamePlay, 1);
+				playerBoards.add(leftPlayerPanel);
+				playerBoards.add(rightPlayerPanel);
+				break;
+				case 4:
+				topPlayerPanel = new TopPlayerPanel(gamePlay, 2);
+				rightPlayerPanel = new RightPlayerPanel(gamePlay, 3);
+				leftPlayerPanel = new LeftPlayerPanel(gamePlay, 1);
+				playerBoards.add(leftPlayerPanel);
+				playerBoards.add(topPlayerPanel);
+				playerBoards.add(rightPlayerPanel);
+				break;
+			}
 
 			//adding the turn rotation panels onto the gameBoard panel
 			gameBoard.add(nextPlayerCheck);
@@ -159,6 +184,9 @@ public class NewMainGui{
 			gameBoard.add(princessPanel);
 
 			gameBoard.add(mainPlayerTablePanel);
+			for (int i=0; i<playerBoards.size(); i++){
+				gameBoard.add(playerBoards.get(i));
+			}
 
 			//turning off all panels except the player check, which sets off the reaction for the rest of the panels
 			nextPlayerCheck.on();
@@ -334,7 +362,11 @@ public class NewMainGui{
 	}
 
 
-
+	public void playerPanelRotate(){
+		for (int i=0; i<playerBoards.size(); i++){
+			playerBoards.get(i).rotatePlayer();
+		}
+	}
 
 	public void repaint() {
 		mainFrame.repaint();

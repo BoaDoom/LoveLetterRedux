@@ -52,6 +52,7 @@ public class Players {
 	public Player getRoster(int playerNumber){
 		return roster.get(playerNumber);
 	}
+	public int getWinRequirement(){return winRequirement;}
 	public boolean getShield(int playerNumber){
 	return roster.get(playerNumber).getShield();}
 	public boolean getActive(int playerNumber){
