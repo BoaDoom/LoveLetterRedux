@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import gameProcessing.Card;
 import gameProcessing.GamePlay;
 import loveLetterGui.cardPanels.*;
 import loveLetterGui.playerPanels.*;
@@ -83,7 +85,7 @@ public class NewMainGui{
 		mainFrame.getContentPane().add(gameBoard);
 		gameBoard.add(testBox);
 
-		mainPlayerTablePanel = new MainPlayerTablePanel(gamePlay);
+
 		//custom action classes for sub-gui class interactions with MainGui
 		nextAction = new NextAction() ;
 		playerCountedAction = new PlayerCountedAction();
@@ -137,6 +139,8 @@ public class NewMainGui{
 			countessPanel = new CountessPanel(gamePlay, cardUseAction, backOutOfTargettingAction);
 			princessPanel = new PrincessPanel(gamePlay, cardUseAction, backOutOfTargettingAction);
 
+			mainPlayerTablePanel = new MainPlayerTablePanel(gamePlay);
+
 
 			//adding the turn rotation panels onto the gameBoard panel
 			gameBoard.add(nextPlayerCheck);
@@ -155,7 +159,7 @@ public class NewMainGui{
 			gameBoard.add(princessPanel);
 
 			gameBoard.add(mainPlayerTablePanel);
-			
+
 			//turning off all panels except the player check, which sets off the reaction for the rest of the panels
 			nextPlayerCheck.on();
 			playCardSelect.off();
@@ -163,6 +167,7 @@ public class NewMainGui{
 			endOfRound.off();
 			endOfGameCheck.off();
 			cardUsePanelsOff();
+			mainPlayerTablePanel.off();
 			refresh();
 		}
 	}
@@ -170,8 +175,12 @@ public class NewMainGui{
 	public class ConfirmPlayerTurnAction implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			nextPlayerCheck.off();
+
 			gamePlay.getCurrentPlayer().shieldOff();
 			gamePlay.dealSecondCard();
+			// ArrayList<Card> testStack = new ArrayList<Card>();
+			// testStack = gamePlay.getDiscardPile();
+			mainPlayerTablePanel.updatePlayer();
 
 			String testString = new String();
 			for (int i=0; i< gamePlay.getPlayerCount(); i++){
@@ -281,7 +290,10 @@ public class NewMainGui{
 				nextPlayerCheck.on();	//starts next players turn if the round isn't over
 			}
 			else {
+				mainPlayerTablePanel.off();
+				repaint();
 				endOfRound.on();
+				mainPlayerTablePanel.resetPlayerBoard();
 			}
 		}
 	}
@@ -324,6 +336,10 @@ public class NewMainGui{
 
 
 
+	public void repaint() {
+		mainFrame.repaint();
+
+	}
 	public void refresh(){
 		gameBoard.validate();
 		gameBoard.repaint();

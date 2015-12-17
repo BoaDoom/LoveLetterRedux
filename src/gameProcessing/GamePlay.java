@@ -108,6 +108,9 @@ public class GamePlay {
 	public int getLastWinner(){
 		return players.getLastWinner();
 	}
+	public ArrayList<Card> getDiscardPile(){
+		return getCurrentPlayer().getDiscardPile();
+	}
 
 	public boolean getShield(int playerNumber){
 	return players.getRoster(playerNumber).getShield();}

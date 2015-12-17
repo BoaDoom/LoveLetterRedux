@@ -79,6 +79,9 @@ public class Player {
 		}
 		return totalValue;
 	}
+	public ArrayList<Card> getDiscardPile(){
+		return discards;
+	}
 
 
 
