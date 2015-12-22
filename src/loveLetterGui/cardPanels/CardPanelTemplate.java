@@ -94,6 +94,7 @@ public class CardPanelTemplate extends JPanel{
     protected JButton buttonChoice2 = new JButton();
     protected JButton backButton = new JButton();
     protected JButton nextButton = new JButton();
+    
     public CardPanelTemplate(){
     this.setBackground(new Color(39,100,39));
     this.setBounds(panelBounds);

@@ -111,6 +111,10 @@ public class GamePlay {
 	public ArrayList<Card> getDiscardPile(){
 		return getCurrentPlayer().getDiscardPile();
 	}
+	public ArrayList<Card> getPlayerDiscardPile(int playerNumber){
+		return players.getRoster(playerNumber).getDiscardPile();
+	}
+	
 	public int getWinRequirement(){
 		return players.getWinRequirement();
 	}

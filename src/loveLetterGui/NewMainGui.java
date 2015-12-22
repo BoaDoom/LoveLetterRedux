@@ -152,18 +152,18 @@ public class NewMainGui{
 				playerBoards.add(topPlayerPanel);
 				break;
 				case 3:
-				rightPlayerPanel = new RightPlayerPanel(gamePlay, 2);
-				leftPlayerPanel = new LeftPlayerPanel(gamePlay, 1);
-				playerBoards.add(leftPlayerPanel);
+				rightPlayerPanel = new RightPlayerPanel(gamePlay, 1);
+				leftPlayerPanel = new LeftPlayerPanel(gamePlay, 2);
 				playerBoards.add(rightPlayerPanel);
+				playerBoards.add(leftPlayerPanel);
 				break;
 				case 4:
 				topPlayerPanel = new TopPlayerPanel(gamePlay, 2);
-				rightPlayerPanel = new RightPlayerPanel(gamePlay, 3);
-				leftPlayerPanel = new LeftPlayerPanel(gamePlay, 1);
-				playerBoards.add(leftPlayerPanel);
-				playerBoards.add(topPlayerPanel);
+				rightPlayerPanel = new RightPlayerPanel(gamePlay, 1);
+				leftPlayerPanel = new LeftPlayerPanel(gamePlay, 3);
 				playerBoards.add(rightPlayerPanel);
+				playerBoards.add(topPlayerPanel);
+				playerBoards.add(leftPlayerPanel);
 				break;
 			}
 
@@ -184,8 +184,10 @@ public class NewMainGui{
 			gameBoard.add(princessPanel);
 
 			gameBoard.add(mainPlayerTablePanel);
+//			gameBoard.add(topPlayerPanel);
 			for (int i=0; i<playerBoards.size(); i++){
 				gameBoard.add(playerBoards.get(i));
+				playerBoards.get(i).on();
 			}
 
 			//turning off all panels except the player check, which sets off the reaction for the rest of the panels
@@ -195,7 +197,7 @@ public class NewMainGui{
 			endOfRound.off();
 			endOfGameCheck.off();
 			cardUsePanelsOff();
-			mainPlayerTablePanel.off();
+			mainPlayerTablePanel.on();
 			refresh();
 		}
 	}
@@ -209,6 +211,10 @@ public class NewMainGui{
 			// ArrayList<Card> testStack = new ArrayList<Card>();
 			// testStack = gamePlay.getDiscardPile();
 			mainPlayerTablePanel.updatePlayer();
+			for (int i=0; i<playerBoards.size(); i++){
+				playerBoards.get(i).updatePlayer();
+			}
+			
 
 			String testString = new String();
 			for (int i=0; i< gamePlay.getPlayerCount(); i++){
@@ -315,13 +321,25 @@ public class NewMainGui{
 			cardUsePanelsOff();
 			if (gamePlay.checkToContinueRound()){
 				gamePlay.endOfTurn();	//rotates to next player
+				for (int i=0; i<playerBoards.size(); i++){
+					playerBoards.get(i).rotatePlayer();
+				}
 				nextPlayerCheck.on();	//starts next players turn if the round isn't over
+
 			}
 			else {
-				mainPlayerTablePanel.off();
+//				mainPlayerTablePanel.off();
 				repaint();
 				endOfRound.on();
 				mainPlayerTablePanel.resetPlayerBoard();
+				for (int i=0; i<playerBoards.size(); i++){
+					playerBoards.get(i).resetPlayerBoard();
+					int tempInt = gamePlay.getLastWinner()+1;
+					if (tempInt >= gamePlay.getPlayerCount()){
+						tempInt = 0;
+					}
+					playerBoards.get(i).resetAfterRound(tempInt);
+				}
 			}
 		}
 	}
