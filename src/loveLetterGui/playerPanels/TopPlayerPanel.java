@@ -17,7 +17,7 @@ public class TopPlayerPanel extends PlayerPanelTemplate{
 	protected int SCORE_YCORD;
 	protected int PLAYERTABLE_HEIGHT;
 	protected int PLAYERTABLE_WIDTH;
-	
+
 	public TopPlayerPanel(GamePlay gamePlay, int playerNumber) {
 		super(gamePlay, playerNumber);
 	    this.playerNumber = playerNumber;
@@ -31,7 +31,7 @@ public class TopPlayerPanel extends PlayerPanelTemplate{
 
 	  int PLAYERTABLE_HEIGHT = 150;
 	  int PLAYERTABLE_WIDTH = 786;
-	  
+
 	  discardPile = new JLabel[MAX_SHOWN_DISCARD_COUNT];
 	    scoreCircle = new JRadioButton[gamePlay.getWinRequirement()];
 	    scoreText = new JLabel();    ///change to dynamic name changing later
@@ -74,6 +74,6 @@ public class TopPlayerPanel extends PlayerPanelTemplate{
 //	    for (int i=0; i<MAX_SHOWN_DISCARD_COUNT; i++){
 //	      discardPile[i].setIcon(null);
 //	    }
-//	    this.playerNumber = 
+//	    this.playerNumber =
 //	}
 }
