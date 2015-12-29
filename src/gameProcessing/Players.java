@@ -27,7 +27,8 @@ public class Players {
 	}
 
 	public void scorePoint(int winningPlayerNumber){
-		lastWinner = winningPlayerNumber;
+		this.lastWinner = winningPlayerNumber;
+		this.currentPlayer = winningPlayerNumber;
 		roster.get(winningPlayerNumber).scoreAPoint();
 	}
 	public int getLastWinner(){

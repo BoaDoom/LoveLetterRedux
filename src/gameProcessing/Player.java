@@ -44,7 +44,9 @@ public class Player {
 		active = true;}
 	public void eliminate(){
 		active = false;
-		discardCard();
+		if (hand.size() >=1){
+			discardCard();
+		}
 	}
 
 

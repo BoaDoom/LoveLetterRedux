@@ -71,7 +71,7 @@ public class GamePlay {
 				playerCount++;
 			}
 		}
-		if (playerCount <= 1){
+		if (playerCount == 1){
 			return false;
 		}
 		else {
@@ -114,7 +114,7 @@ public class GamePlay {
 	public ArrayList<Card> getPlayerDiscardPile(int playerNumber){
 		return players.getRoster(playerNumber).getDiscardPile();
 	}
-	
+
 	public int getWinRequirement(){
 		return players.getWinRequirement();
 	}

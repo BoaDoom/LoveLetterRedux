@@ -214,13 +214,13 @@ public class NewMainGui{
 			for (int i=0; i<playerBoards.size(); i++){
 				playerBoards.get(i).updatePlayer();
 			}
-			
+
 
 			String testString = new String();
 			for (int i=0; i< gamePlay.getPlayerCount(); i++){
 				testString += (" "+(i+1)+": "+ gamePlay.getRosterPlayer(i).getScore());
 			}
-			testBox.setText(testString);
+			testBox.setText(gamePlay.getLastWinner()+"");
 			//=====================selects which card to play
 			playCardSelect.on();
 		}
@@ -255,8 +255,7 @@ public class NewMainGui{
 			Integer target = new Integer(((PlayerTargetButtons) e.getSource()).getChoice()); //collects which target was chosen by the button pressed
 			gamePlay.getCurrentPlayer().discardChoice();	//discards the card played and whos action is used
 			if (target == -1){		//if the card was played without any action or target
-				gamePlay.endOfTurn();	//rotates to next player
-				nextPlayerCheck.on();	//starts next players turn if the round isn't over
+				endOfTurn();
 			}
 			else{
 				int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();		//turns on the appropriate card action panel
@@ -303,15 +302,15 @@ public class NewMainGui{
 		int cardUsed = gamePlay.getCurrentPlayer().getPlayedCard().getValue();
 		switch(cardUsed){
 			case 4:
-			handmaidPanel.action();
 			gamePlay.getCurrentPlayer().discardChoice();	//discards the card played and whos action is used
+			handmaidPanel.action();
 			break;
 			case 7:
 			gamePlay.getCurrentPlayer().discardChoice();	//discards the card played and whos action is used
 			break;
 			case 8:
-			princessPanel.action();
 			gamePlay.getCurrentPlayer().discardChoice();	//discards the card played and whos action is used
+			princessPanel.action();
 			break;
 		}
 	}
@@ -320,22 +319,19 @@ public class NewMainGui{
 			specialTargetingCardsAction();	//performs the action of self-use only cards after the card is confirmed
 			cardUsePanelsOff();
 			if (gamePlay.checkToContinueRound()){
-				gamePlay.endOfTurn();	//rotates to next player
-				for (int i=0; i<playerBoards.size(); i++){
-					playerBoards.get(i).rotatePlayer();
-				}
-				nextPlayerCheck.on();	//starts next players turn if the round isn't over
-
+				endOfTurn();
 			}
 			else {
 //				mainPlayerTablePanel.off();
 				repaint();
 				endOfRound.on();
+				gamePlay.endOfRound();//resets deck, players cards and players states
 				mainPlayerTablePanel.resetPlayerBoard();
+				int tempInt = gamePlay.getLastWinner();
 				for (int i=0; i<playerBoards.size(); i++){
 					playerBoards.get(i).resetPlayerBoard();
-					int tempInt = gamePlay.getLastWinner()+1;
-					if (tempInt >= gamePlay.getPlayerCount()){
+					tempInt += 1;
+					if (tempInt == gamePlay.getPlayerCount()){
 						tempInt = 0;
 					}
 					playerBoards.get(i).resetAfterRound(tempInt);
@@ -348,7 +344,6 @@ public class NewMainGui{
 		public void actionPerformed(ActionEvent e){
 			endOfRound.off();
 			if (!gamePlay.checkForEnoughScore()){
-				gamePlay.endOfRound();//resets deck, players cards and players states
 				nextPlayerCheck.on();	//starts next round if the game isn't over
 			}
 			else {
@@ -381,6 +376,14 @@ public class NewMainGui{
 
 
 	public void playerPanelRotate(){
+		for (int i=0; i<playerBoards.size(); i++){
+			playerBoards.get(i).rotatePlayer();
+		}
+	}
+
+	public void endOfTurn(){
+		gamePlay.endOfTurn();	//rotates to next player
+		nextPlayerCheck.on();	//starts next players turn if the round isn't over
 		for (int i=0; i<playerBoards.size(); i++){
 			playerBoards.get(i).rotatePlayer();
 		}

@@ -35,7 +35,7 @@ public class PlayerPanelTemplate extends JPanel{
   public PlayerPanelTemplate(GamePlay gamePlay, int playerNumber){
 	this.playerNumber = playerNumber;
 	this.gamePlay = gamePlay;
-    
+
 //      discardPile[i].setIcon(QuickGui.importImage("C:/Java Work folder/LoveLetterRedux/Pictures/lovelettercards_Guard_small.jpg"));
     }
 
@@ -58,9 +58,9 @@ public class PlayerPanelTemplate extends JPanel{
     this.repaint();
   }
   public void rotatePlayer(){
-    playerNumber++;
+    this.playerNumber++;
     if (playerNumber >= gamePlay.getPlayerCount()){
-      playerNumber = 0;
+      this.playerNumber = 0;
     }
   }
 
