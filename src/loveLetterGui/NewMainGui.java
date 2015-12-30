@@ -23,8 +23,8 @@ import javax.swing.JButton;
 
 public class NewMainGui{
 
-	public final int MAINFRAME_WIDTH = 786;
-	public final int MAINFRAME_HEIGHT = 593;
+	public final static int MAINFRAME_WIDTH = 786;
+	public final static int MAINFRAME_HEIGHT = 593;
 
 	private JFrame mainFrame;
 	private JPanel gameBoard;
@@ -35,7 +35,7 @@ public class NewMainGui{
 	private TopPlayerPanel topPlayerPanel;
 	private ArrayList<PlayerPanelTemplate> playerBoards;
 
-	private MainPlayerTablePanel mainPlayerTablePanel;
+	private MainPlayerPanel mainPlayerPanel;
 
 	//actons done to swap between GUI pannels
 	private NextAction nextAction;		//generic next button for progressing to next screen
@@ -144,7 +144,7 @@ public class NewMainGui{
 			countessPanel = new CountessPanel(gamePlay, cardUseAction, backOutOfTargettingAction);
 			princessPanel = new PrincessPanel(gamePlay, cardUseAction, backOutOfTargettingAction);
 
-			mainPlayerTablePanel = new MainPlayerTablePanel(gamePlay);
+			mainPlayerPanel = new MainPlayerPanel(gamePlay, 0);
 			playerBoards = new ArrayList<PlayerPanelTemplate>();
 			switch (count){
 				case 2:
@@ -183,7 +183,7 @@ public class NewMainGui{
 			gameBoard.add(countessPanel);
 			gameBoard.add(princessPanel);
 
-			gameBoard.add(mainPlayerTablePanel);
+			gameBoard.add(mainPlayerPanel);
 //			gameBoard.add(topPlayerPanel);
 			for (int i=0; i<playerBoards.size(); i++){
 				gameBoard.add(playerBoards.get(i));
@@ -197,7 +197,7 @@ public class NewMainGui{
 			endOfRound.off();
 			endOfGameCheck.off();
 			cardUsePanelsOff();
-			mainPlayerTablePanel.on();
+			mainPlayerPanel.on();
 			refresh();
 		}
 	}
@@ -210,7 +210,7 @@ public class NewMainGui{
 			gamePlay.dealSecondCard();
 			// ArrayList<Card> testStack = new ArrayList<Card>();
 			// testStack = gamePlay.getDiscardPile();
-			mainPlayerTablePanel.updatePlayer();
+			mainPlayerPanel.updatePlayer();
 			for (int i=0; i<playerBoards.size(); i++){
 				playerBoards.get(i).updatePlayer();
 			}
@@ -322,11 +322,11 @@ public class NewMainGui{
 				endOfTurn();
 			}
 			else {
-//				mainPlayerTablePanel.off();
+//				mainPlayerPanel.off();
 				repaint();
 				endOfRound.on();
 				gamePlay.endOfRound();//resets deck, players cards and players states
-				mainPlayerTablePanel.resetPlayerBoard();
+				mainPlayerPanel.resetPlayerBoard();
 				int tempInt = gamePlay.getLastWinner();
 				for (int i=0; i<playerBoards.size(); i++){
 					playerBoards.get(i).resetPlayerBoard();
@@ -375,17 +375,17 @@ public class NewMainGui{
 	}
 
 
-	public void playerPanelRotate(){
+	public void endOfTurn(){
+		gamePlay.endOfTurn();	//rotates to next player
+		// mainPlayerPanel.rotatePlayer();
 		for (int i=0; i<playerBoards.size(); i++){
 			playerBoards.get(i).rotatePlayer();
 		}
-	}
-
-	public void endOfTurn(){
-		gamePlay.endOfTurn();	//rotates to next player
-		nextPlayerCheck.on();	//starts next players turn if the round isn't over
-		for (int i=0; i<playerBoards.size(); i++){
-			playerBoards.get(i).rotatePlayer();
+		if (!gamePlay.getCurrentPlayer().getActive()){
+			endOfTurn();
+		}
+		else{
+			nextPlayerCheck.on();	//starts next players turn if the round isn't over
 		}
 	}
 
