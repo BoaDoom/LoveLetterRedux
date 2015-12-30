@@ -67,6 +67,7 @@ public class PlayCardSelect extends CardPanelTemplate{
     CardChoiceButtons(String text, int choice){
       this.setDialogText(text);
       this.choice = choice;
+      this.setFont(BUTTON_FONT);
     }
     public int getChoice(){
       return choice;

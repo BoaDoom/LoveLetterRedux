@@ -7,17 +7,18 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import gameProcessing.GamePlay;
+import loveLetterGui.NewMainGui;
 
 public class TopPlayerPanel extends PlayerPanelTemplate{
 	int playerNumber;
 	GamePlay gamePlay;
 	int PLAYERTABLE_HEIGHT = 150;
-	int PLAYERTABLE_WIDTH = 786;
+	static int PLAYERTABLE_WIDTH = 400;//786;
 
-	private final static int ORIGIN_X =350;
+	private final static int ORIGIN_X =(PLAYERTABLE_WIDTH/2);
 	private final static int ORIGIN_Y =15;
 
-	private final static int LOCATION_X =0;
+	private final static int LOCATION_X =((NewMainGui.MAINFRAME_WIDTH-400)/2);
 	private final static int LOCATION_Y =0;
 
 	public TopPlayerPanel(GamePlay gamePlay, int playerNumber) {

@@ -74,6 +74,9 @@ public class NewMainGui{
 	private int playerCount;
 
 	public NewMainGui(){//=====================constructor
+
+
+
 		mainFrame = new JFrame();
 		gameBoard = new JPanel();
 		testBox = new JLabel("TEST BOX");

@@ -36,6 +36,7 @@ public class PlayerCountSelect extends CardPanelTemplate{    //slecting the amou
     PlayerCountButton(String name, int playerCount){
       this.setText(name);
       this.count = playerCount;
+      this.setFont(BUTTON_FONT);
     }
     public int getCount(){
       return count;

@@ -80,6 +80,7 @@ public class GuardPanel extends CardPanelTemplate{
     int choice;
     CardGuessButtons(int choice){
       this.choice = choice;
+      this.setFont(BUTTON_FONT);
     }
     public int getChoice(){
       return choice;

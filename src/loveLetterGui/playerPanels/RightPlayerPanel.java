@@ -12,14 +12,14 @@ import loveLetterGui.NewMainGui;
 public class RightPlayerPanel extends PlayerPanelTemplate{
 	int playerNumber;
 	GamePlay gamePlay;
-	int PLAYERTABLE_HEIGHT = 200;
+	static int PLAYERTABLE_HEIGHT = 200;
 	static int PLAYERTABLE_WIDTH = 200;
 
 	private final static int ORIGIN_X =10;
 	private final static int ORIGIN_Y =10;
 
 	private final static int LOCATION_X = NewMainGui.MAINFRAME_WIDTH - PLAYERTABLE_WIDTH;
-	private final static int LOCATION_Y = 200;
+	private final static int LOCATION_Y = NewMainGui.MAINFRAME_HEIGHT -PLAYERTABLE_HEIGHT-100;
 
 	public RightPlayerPanel(GamePlay gamePlay, int playerNumber) {
 		super(gamePlay, playerNumber, ORIGIN_X, ORIGIN_Y);

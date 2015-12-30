@@ -1,6 +1,7 @@
 package loveLetterGui.cardPanels;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 
@@ -10,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import gameProcessing.GamePlay;
+import loveLetterGui.NewMainGui;
 
 public class CardPanelTemplate extends JPanel{
   public static final int CARD_LENGTH = 122;
@@ -18,15 +20,16 @@ public class CardPanelTemplate extends JPanel{
 
 	public static final int HEIGHT_OF_FONT = 14;
 
-  public static int BUTTON_WIDTH = 119;
-  public static int BUTTON_HEIGHT = 37;
+  public static int BUTTON_WIDTH = 105;
+  public static int BUTTON_HEIGHT = 30;
 	public static int BUTTON_CHOICE_YCORD = 245;
+  public static Font BUTTON_FONT = new Font("BUTTON_FONT", Font.BOLD, 9);
 
   //main panel properties
-  public static final int panelLocationX = 170;
-  public static final int panelLocationY = 193;
-  public static final int panelLength = 420;
+  public static final int panelLength = 330;
   public static final int panelHeight = 375;
+  public static final int panelLocationX = (NewMainGui.MAINFRAME_WIDTH-panelLength)/2;
+  public static final int panelLocationY = 193;
   protected Rectangle panelBounds = new Rectangle(panelLocationX, panelLocationY, panelLength, panelHeight);
 
   //card image properties
@@ -70,11 +73,11 @@ public class CardPanelTemplate extends JPanel{
 
   public static final int buttonNextLength = BUTTON_WIDTH;
   public static final int buttonNextHeight = BUTTON_HEIGHT;
-  public static final int buttonNextLocationX = cardImageCenterLocationX;
+  public static final int buttonNextLocationX = (panelLength/2)-((buttonChoice1Length)/2);
   public static final int buttonNextLocationY = (panelHeight-60);
   protected Rectangle buttonNextBounds = new Rectangle(buttonNextLocationX, buttonNextLocationY, buttonNextLength, buttonNextHeight);
 
-  public static final int buttonBackLength = 89;
+  public static final int buttonBackLength = 80;
 	public static final int buttonBackHeight = 23;
 	public static final int buttonBackLocationX = 10;
 	public static final int buttonBackLocationY = (panelHeight-50);
@@ -94,12 +97,19 @@ public class CardPanelTemplate extends JPanel{
     protected JButton buttonChoice2 = new JButton();
     protected JButton backButton = new JButton();
     protected JButton nextButton = new JButton();
-    
+
+
+
     public CardPanelTemplate(){
     this.setBackground(new Color(39,100,39));
     this.setBounds(panelBounds);
     setLayout(null);
 
+
+    buttonChoice1.setFont(BUTTON_FONT);
+    buttonChoice2.setFont(BUTTON_FONT);
+    backButton.setFont(BUTTON_FONT);
+    nextButton.setFont(BUTTON_FONT);
 
     cardImage1.setBounds(cardImage1Bounds);
     cardImage2.setBounds(cardImage2Bounds);
@@ -113,10 +123,6 @@ public class CardPanelTemplate extends JPanel{
     backButton.setBounds(buttonBackBounds);
     nextButton.setBounds(buttonNextBounds);
 
-    dialog0.setHorizontalAlignment(SwingConstants.CENTER);
-    dialog1.setHorizontalAlignment(SwingConstants.CENTER);
-    dialog2.setHorizontalAlignment(SwingConstants.CENTER);
-    dialog3.setHorizontalAlignment(SwingConstants.CENTER);
 
     cardImage1.setVisible(false);
     cardImage2.setVisible(false);
@@ -132,6 +138,10 @@ public class CardPanelTemplate extends JPanel{
     nextButton.setText("Next");
     backButton.setText("Back");
 
+    dialog0.setHorizontalAlignment(SwingConstants.CENTER);
+    dialog1.setHorizontalAlignment(SwingConstants.CENTER);
+    dialog2.setHorizontalAlignment(SwingConstants.CENTER);
+    dialog3.setHorizontalAlignment(SwingConstants.CENTER);
   }
 
 

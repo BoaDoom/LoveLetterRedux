@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import gameProcessing.Card;
 import gameProcessing.GamePlay;
@@ -29,6 +30,7 @@ public class TargetSelect extends CardPanelTemplate{
     noTargetButton.setBounds(buttonNextBounds);
     noTargetButton.setText("Discard");
     noTargetButton.setVisible(false);
+    noTargetButton.setFont(BUTTON_FONT);
 
     this.add(dialog0);
     this.add(cardImageCenter);
@@ -47,9 +49,12 @@ public class TargetSelect extends CardPanelTemplate{
       targetButtons.add(player);
       targetButtons.get(i).setBounds((split*i)+((split/2)-(BUTTON_WIDTH-25)/2), buttonChoice1LocationY, BUTTON_WIDTH-25, BUTTON_HEIGHT);
       playerNames.add(playerName);
-      playerNames.get(i).setBounds((split*i)+((split/2)-(BUTTON_WIDTH-25)/2)+25, buttonChoice1LocationY+30, BUTTON_WIDTH-25, BUTTON_HEIGHT);
+      playerNames.get(i).setBounds((split*i)+((split/2)-(BUTTON_WIDTH-25)/2), buttonChoice1LocationY+25, BUTTON_WIDTH-25, BUTTON_HEIGHT);
       this.add(targetButtons.get(i));
       this.add(playerNames.get(i));
+    }
+    for (int i=0; i<gamePlay.getPlayerCount(); i++){    //loop for placing the correct amount of buttons and corisponding playerNames
+      playerNames.get(i).setHorizontalAlignment(SwingConstants.CENTER);
     }
    }
   public void askForTarget(){
@@ -111,6 +116,7 @@ public class TargetSelect extends CardPanelTemplate{
     int choice;
     PlayerTargetButtons(int choice){
       this.choice = choice;
+      this.setFont(BUTTON_FONT);
     }
     public int getChoice(){
       return choice;

@@ -18,7 +18,7 @@ public class LeftPlayerPanel extends PlayerPanelTemplate{
 	private final static int ORIGIN_Y =10;
 
 	private final static int LOCATION_X =0;
-	private final static int LOCATION_Y =200;
+	private final static int LOCATION_Y =100;
 
 	public LeftPlayerPanel(GamePlay gamePlay, int playerNumber) {
 		super(gamePlay, playerNumber, ORIGIN_X, ORIGIN_Y);
